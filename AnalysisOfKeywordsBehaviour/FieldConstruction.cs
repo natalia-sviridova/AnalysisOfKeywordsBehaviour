@@ -101,7 +101,7 @@ namespace AnalysisOfKeywordsBehaviour
         /// <param name="importantWords">Список важных слов.</param>
         public FieldConstruction(List<string> allWords, List<string> definitions, List<string> freeAssociations, List<string> directAssociations, List<string> similarities, List<string> opposities, List<string> importantWords)
         {
-            //инициализация списков с экспериментальными данными
+            //инициализируем списки с экспериментальными данными
             AllWords = new List<string>(allWords);
             Definitions = new List<string>(definitions);
             FreeAssociations = new List<string>(freeAssociations);
@@ -117,7 +117,7 @@ namespace AnalysisOfKeywordsBehaviour
         /// <param name="word">Экспериментальное слово для построения ассоциативного поля.</param>
         public void InitField(string word)
         {
-            //инициализация необходимых параметров для ассоциативного поля 
+            //инициализируем необходимые параметры для ассоциативного поля 
             _word = word;
             Steps = 0;
             Levels = 0;
