@@ -20,6 +20,10 @@ namespace AnalysisOfKeywordsBehaviour
         /// </summary>
         public const string ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
         /// <summary>
+        /// Количество маркем в одной группе для расчета коэффициента корреляции.
+        /// </summary>
+        public const int NUM_OF_MARKEMS = 10;
+        /// <summary>
         /// Разделители между словами.
         /// </summary>
         public static readonly char[] SPLITTERS = { ' ', ',', '-' };

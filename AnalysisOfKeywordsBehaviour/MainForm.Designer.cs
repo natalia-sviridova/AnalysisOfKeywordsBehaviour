@@ -105,15 +105,16 @@
             this.маркемToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.просмотретьСписокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.экспериментальныхСловToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.важныхСловToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.оппозитовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.симиляровToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.направленныхАссоциацийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.свободныхАссоциацийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.дефиницийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.важныеСловаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оппозитыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.симилярыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.направленныеАссоциацииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.свободныеАссоциацииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.дефиницииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.маркемToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.иментальныхСловToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.экспериментальныеСловаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.загрузитьСписокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.текстДляАнализаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.dataGridViewAllWords = new System.Windows.Forms.DataGridView();
             this.ShareOfMarkemsInSwitches = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -143,8 +144,6 @@
             this.comboBoxAllWords = new System.Windows.Forms.ComboBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnCalculateCooccurrence = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.текстДляАнализаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbPageRes.SuspendLayout();
             this.tbPageImportantWords.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImportantWords)).BeginInit();
@@ -166,22 +165,22 @@
             // tBCorFactor1
             // 
             this.tBCorFactor1.Enabled = false;
-            this.tBCorFactor1.Location = new System.Drawing.Point(318, 295);
+            this.tBCorFactor1.Location = new System.Drawing.Point(277, 295);
             this.tBCorFactor1.Name = "tBCorFactor1";
             this.tBCorFactor1.Size = new System.Drawing.Size(187, 20);
             this.tBCorFactor1.TabIndex = 19;
             // 
             // tBAvgNumMarkemsAllNoMarkems
             // 
-            this.tBAvgNumMarkemsAllNoMarkems.Location = new System.Drawing.Point(912, 299);
+            this.tBAvgNumMarkemsAllNoMarkems.Location = new System.Drawing.Point(851, 302);
             this.tBAvgNumMarkemsAllNoMarkems.Name = "tBAvgNumMarkemsAllNoMarkems";
-            this.tBAvgNumMarkemsAllNoMarkems.Size = new System.Drawing.Size(105, 20);
+            this.tBAvgNumMarkemsAllNoMarkems.Size = new System.Drawing.Size(82, 20);
             this.tBAvgNumMarkemsAllNoMarkems.TabIndex = 23;
             // 
             // lbAvgNumMarkemsAllNoMarkems
             // 
             this.lbAvgNumMarkemsAllNoMarkems.AutoSize = true;
-            this.lbAvgNumMarkemsAllNoMarkems.Location = new System.Drawing.Point(541, 283);
+            this.lbAvgNumMarkemsAllNoMarkems.Location = new System.Drawing.Point(480, 286);
             this.lbAvgNumMarkemsAllNoMarkems.Name = "lbAvgNumMarkemsAllNoMarkems";
             this.lbAvgNumMarkemsAllNoMarkems.Size = new System.Drawing.Size(467, 13);
             this.lbAvgNumMarkemsAllNoMarkems.TabIndex = 22;
@@ -190,15 +189,15 @@
             // 
             // tBAvgNumMarkemsConcNoMarkems
             // 
-            this.tBAvgNumMarkemsConcNoMarkems.Location = new System.Drawing.Point(912, 243);
+            this.tBAvgNumMarkemsConcNoMarkems.Location = new System.Drawing.Point(851, 246);
             this.tBAvgNumMarkemsConcNoMarkems.Name = "tBAvgNumMarkemsConcNoMarkems";
-            this.tBAvgNumMarkemsConcNoMarkems.Size = new System.Drawing.Size(105, 20);
+            this.tBAvgNumMarkemsConcNoMarkems.Size = new System.Drawing.Size(82, 20);
             this.tBAvgNumMarkemsConcNoMarkems.TabIndex = 21;
             // 
             // lbAvgNumMarkemsConcNoMarkems
             // 
             this.lbAvgNumMarkemsConcNoMarkems.AutoSize = true;
-            this.lbAvgNumMarkemsConcNoMarkems.Location = new System.Drawing.Point(541, 227);
+            this.lbAvgNumMarkemsConcNoMarkems.Location = new System.Drawing.Point(480, 230);
             this.lbAvgNumMarkemsConcNoMarkems.Name = "lbAvgNumMarkemsConcNoMarkems";
             this.lbAvgNumMarkemsConcNoMarkems.Size = new System.Drawing.Size(430, 13);
             this.lbAvgNumMarkemsConcNoMarkems.TabIndex = 20;
@@ -208,7 +207,7 @@
             // 
             this.tBAvgNumMarkemsAllMarkems.Location = new System.Drawing.Point(382, 302);
             this.tBAvgNumMarkemsAllMarkems.Name = "tBAvgNumMarkemsAllMarkems";
-            this.tBAvgNumMarkemsAllMarkems.Size = new System.Drawing.Size(105, 20);
+            this.tBAvgNumMarkemsAllMarkems.Size = new System.Drawing.Size(82, 20);
             this.tBAvgNumMarkemsAllMarkems.TabIndex = 19;
             // 
             // lbAvgNumMarkemsAllMarkems
@@ -224,7 +223,7 @@
             // 
             this.tBAvgNumMarkemsConcMarkems.Location = new System.Drawing.Point(382, 246);
             this.tBAvgNumMarkemsConcMarkems.Name = "tBAvgNumMarkemsConcMarkems";
-            this.tBAvgNumMarkemsConcMarkems.Size = new System.Drawing.Size(105, 20);
+            this.tBAvgNumMarkemsConcMarkems.Size = new System.Drawing.Size(82, 20);
             this.tBAvgNumMarkemsConcMarkems.TabIndex = 17;
             // 
             // lbAvgNumMarkemsConcMarkems
@@ -264,22 +263,22 @@
             this.tbPageRes.Controls.Add(this.lbAvgNumSwitInMarkems);
             this.tbPageRes.Location = new System.Drawing.Point(4, 22);
             this.tbPageRes.Name = "tbPageRes";
-            this.tbPageRes.Size = new System.Drawing.Size(1042, 330);
+            this.tbPageRes.Size = new System.Drawing.Size(941, 330);
             this.tbPageRes.TabIndex = 3;
             this.tbPageRes.Text = "Некоторые показатели";
             this.tbPageRes.UseVisualStyleBackColor = true;
             // 
             // tBAvgNumMarkemsSwitNoMarkems
             // 
-            this.tBAvgNumMarkemsSwitNoMarkems.Location = new System.Drawing.Point(913, 189);
+            this.tBAvgNumMarkemsSwitNoMarkems.Location = new System.Drawing.Point(852, 192);
             this.tBAvgNumMarkemsSwitNoMarkems.Name = "tBAvgNumMarkemsSwitNoMarkems";
-            this.tBAvgNumMarkemsSwitNoMarkems.Size = new System.Drawing.Size(106, 20);
+            this.tBAvgNumMarkemsSwitNoMarkems.Size = new System.Drawing.Size(81, 20);
             this.tBAvgNumMarkemsSwitNoMarkems.TabIndex = 15;
             // 
             // lbAvgNumMarkemsSwitNoMarkems
             // 
             this.lbAvgNumMarkemsSwitNoMarkems.AutoSize = true;
-            this.lbAvgNumMarkemsSwitNoMarkems.Location = new System.Drawing.Point(543, 173);
+            this.lbAvgNumMarkemsSwitNoMarkems.Location = new System.Drawing.Point(482, 176);
             this.lbAvgNumMarkemsSwitNoMarkems.Name = "lbAvgNumMarkemsSwitNoMarkems";
             this.lbAvgNumMarkemsSwitNoMarkems.Size = new System.Drawing.Size(445, 13);
             this.lbAvgNumMarkemsSwitNoMarkems.TabIndex = 14;
@@ -289,7 +288,7 @@
             // 
             this.tBAvgNumMarkemsSwitMarkems.Location = new System.Drawing.Point(383, 192);
             this.tBAvgNumMarkemsSwitMarkems.Name = "tBAvgNumMarkemsSwitMarkems";
-            this.tBAvgNumMarkemsSwitMarkems.Size = new System.Drawing.Size(105, 20);
+            this.tBAvgNumMarkemsSwitMarkems.Size = new System.Drawing.Size(81, 20);
             this.tBAvgNumMarkemsSwitMarkems.TabIndex = 13;
             // 
             // lbAvgNumMarkemsSwitMarkems
@@ -303,15 +302,15 @@
             // 
             // tBAvgNumAllInNoMarkems
             // 
-            this.tBAvgNumAllInNoMarkems.Location = new System.Drawing.Point(911, 128);
+            this.tBAvgNumAllInNoMarkems.Location = new System.Drawing.Point(850, 131);
             this.tBAvgNumAllInNoMarkems.Name = "tBAvgNumAllInNoMarkems";
-            this.tBAvgNumAllInNoMarkems.Size = new System.Drawing.Size(105, 20);
+            this.tBAvgNumAllInNoMarkems.Size = new System.Drawing.Size(83, 20);
             this.tBAvgNumAllInNoMarkems.TabIndex = 11;
             // 
             // lbAvgNumAllInNoMarkems
             // 
             this.lbAvgNumAllInNoMarkems.AutoSize = true;
-            this.lbAvgNumAllInNoMarkems.Location = new System.Drawing.Point(541, 112);
+            this.lbAvgNumAllInNoMarkems.Location = new System.Drawing.Point(480, 115);
             this.lbAvgNumAllInNoMarkems.Name = "lbAvgNumAllInNoMarkems";
             this.lbAvgNumAllInNoMarkems.Size = new System.Drawing.Size(444, 13);
             this.lbAvgNumAllInNoMarkems.TabIndex = 10;
@@ -321,7 +320,7 @@
             // 
             this.tBAvgNumAllInMarkems.Location = new System.Drawing.Point(381, 131);
             this.tBAvgNumAllInMarkems.Name = "tBAvgNumAllInMarkems";
-            this.tBAvgNumAllInMarkems.Size = new System.Drawing.Size(105, 20);
+            this.tBAvgNumAllInMarkems.Size = new System.Drawing.Size(83, 20);
             this.tBAvgNumAllInMarkems.TabIndex = 9;
             // 
             // lbAvgNumAllInMarkems
@@ -335,15 +334,15 @@
             // 
             // tBAvgNumConcInNoMarkems
             // 
-            this.tBAvgNumConcInNoMarkems.Location = new System.Drawing.Point(912, 62);
+            this.tBAvgNumConcInNoMarkems.Location = new System.Drawing.Point(851, 65);
             this.tBAvgNumConcInNoMarkems.Name = "tBAvgNumConcInNoMarkems";
-            this.tBAvgNumConcInNoMarkems.Size = new System.Drawing.Size(105, 20);
+            this.tBAvgNumConcInNoMarkems.Size = new System.Drawing.Size(82, 20);
             this.tBAvgNumConcInNoMarkems.TabIndex = 7;
             // 
             // lbAvgNumConcInNoMarkems
             // 
             this.lbAvgNumConcInNoMarkems.AutoSize = true;
-            this.lbAvgNumConcInNoMarkems.Location = new System.Drawing.Point(542, 65);
+            this.lbAvgNumConcInNoMarkems.Location = new System.Drawing.Point(481, 68);
             this.lbAvgNumConcInNoMarkems.Name = "lbAvgNumConcInNoMarkems";
             this.lbAvgNumConcInNoMarkems.Size = new System.Drawing.Size(354, 13);
             this.lbAvgNumConcInNoMarkems.TabIndex = 6;
@@ -351,15 +350,15 @@
             // 
             // tBAvgNumSwitInNoMarkems
             // 
-            this.tBAvgNumSwitInNoMarkems.Location = new System.Drawing.Point(912, 12);
+            this.tBAvgNumSwitInNoMarkems.Location = new System.Drawing.Point(850, 15);
             this.tBAvgNumSwitInNoMarkems.Name = "tBAvgNumSwitInNoMarkems";
-            this.tBAvgNumSwitInNoMarkems.Size = new System.Drawing.Size(105, 20);
+            this.tBAvgNumSwitInNoMarkems.Size = new System.Drawing.Size(83, 20);
             this.tBAvgNumSwitInNoMarkems.TabIndex = 5;
             // 
             // lbAvgNumSwitInNoMarkems
             // 
             this.lbAvgNumSwitInNoMarkems.AutoSize = true;
-            this.lbAvgNumSwitInNoMarkems.Location = new System.Drawing.Point(542, 15);
+            this.lbAvgNumSwitInNoMarkems.Location = new System.Drawing.Point(481, 18);
             this.lbAvgNumSwitInNoMarkems.Name = "lbAvgNumSwitInNoMarkems";
             this.lbAvgNumSwitInNoMarkems.Size = new System.Drawing.Size(369, 13);
             this.lbAvgNumSwitInNoMarkems.TabIndex = 4;
@@ -369,7 +368,7 @@
             // 
             this.tBAvgNumConcInMarkems.Location = new System.Drawing.Point(382, 65);
             this.tBAvgNumConcInMarkems.Name = "tBAvgNumConcInMarkems";
-            this.tBAvgNumConcInMarkems.Size = new System.Drawing.Size(105, 20);
+            this.tBAvgNumConcInMarkems.Size = new System.Drawing.Size(82, 20);
             this.tBAvgNumConcInMarkems.TabIndex = 3;
             // 
             // lbAvgNumConcInMarkems
@@ -385,7 +384,7 @@
             // 
             this.tBAvgNumSwitInMarkems.Location = new System.Drawing.Point(382, 15);
             this.tBAvgNumSwitInMarkems.Name = "tBAvgNumSwitInMarkems";
-            this.tBAvgNumSwitInMarkems.Size = new System.Drawing.Size(105, 20);
+            this.tBAvgNumSwitInMarkems.Size = new System.Drawing.Size(82, 20);
             this.tBAvgNumSwitInMarkems.TabIndex = 1;
             // 
             // lbAvgNumSwitInMarkems
@@ -414,7 +413,7 @@
             this.tbPageImportantWords.Controls.Add(this.dataGridViewImportantWords);
             this.tbPageImportantWords.Location = new System.Drawing.Point(4, 22);
             this.tbPageImportantWords.Name = "tbPageImportantWords";
-            this.tbPageImportantWords.Size = new System.Drawing.Size(1042, 330);
+            this.tbPageImportantWords.Size = new System.Drawing.Size(941, 330);
             this.tbPageImportantWords.TabIndex = 2;
             this.tbPageImportantWords.Text = "Важные слова";
             this.tbPageImportantWords.UseVisualStyleBackColor = true;
@@ -428,10 +427,10 @@
             this.dataGridViewImportantWords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ImportantWord,
             this.ImpWordAsContactor});
-            this.dataGridViewImportantWords.Location = new System.Drawing.Point(8, 14);
+            this.dataGridViewImportantWords.Location = new System.Drawing.Point(8, 13);
             this.dataGridViewImportantWords.Name = "dataGridViewImportantWords";
             this.dataGridViewImportantWords.ReadOnly = true;
-            this.dataGridViewImportantWords.Size = new System.Drawing.Size(294, 301);
+            this.dataGridViewImportantWords.Size = new System.Drawing.Size(294, 302);
             this.dataGridViewImportantWords.TabIndex = 0;
             // 
             // dataGridViewTextBoxColumn3
@@ -484,7 +483,7 @@
             // lbCorFactor2
             // 
             this.lbCorFactor2.AutoSize = true;
-            this.lbCorFactor2.Location = new System.Drawing.Point(842, 279);
+            this.lbCorFactor2.Location = new System.Drawing.Point(745, 279);
             this.lbCorFactor2.Name = "lbCorFactor2";
             this.lbCorFactor2.Size = new System.Drawing.Size(180, 13);
             this.lbCorFactor2.TabIndex = 18;
@@ -493,7 +492,7 @@
             // tBCorFactor2
             // 
             this.tBCorFactor2.Enabled = false;
-            this.tBCorFactor2.Location = new System.Drawing.Point(845, 295);
+            this.tBCorFactor2.Location = new System.Drawing.Point(748, 295);
             this.tBCorFactor2.Name = "tBCorFactor2";
             this.tBCorFactor2.Size = new System.Drawing.Size(187, 20);
             this.tBCorFactor2.TabIndex = 20;
@@ -563,7 +562,7 @@
             // lbCorFactor1
             // 
             this.lbCorFactor1.AutoSize = true;
-            this.lbCorFactor1.Location = new System.Drawing.Point(315, 279);
+            this.lbCorFactor1.Location = new System.Drawing.Point(274, 279);
             this.lbCorFactor1.Name = "lbCorFactor1";
             this.lbCorFactor1.Size = new System.Drawing.Size(180, 13);
             this.lbCorFactor1.TabIndex = 17;
@@ -584,7 +583,7 @@
             this.tbPageMarkems.Location = new System.Drawing.Point(4, 22);
             this.tbPageMarkems.Name = "tbPageMarkems";
             this.tbPageMarkems.Padding = new System.Windows.Forms.Padding(3);
-            this.tbPageMarkems.Size = new System.Drawing.Size(1042, 330);
+            this.tbPageMarkems.Size = new System.Drawing.Size(941, 330);
             this.tbPageMarkems.TabIndex = 1;
             this.tbPageMarkems.Text = "Маркемы";
             this.tbPageMarkems.UseVisualStyleBackColor = true;
@@ -598,7 +597,7 @@
             this.dataGridViewСorFactor2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn16,
             this.dataGridViewTextBoxColumn17});
-            this.dataGridViewСorFactor2.Location = new System.Drawing.Point(842, 23);
+            this.dataGridViewСorFactor2.Location = new System.Drawing.Point(748, 23);
             this.dataGridViewСorFactor2.Name = "dataGridViewСorFactor2";
             this.dataGridViewСorFactor2.ReadOnly = true;
             this.dataGridViewСorFactor2.Size = new System.Drawing.Size(187, 239);
@@ -613,7 +612,7 @@
             this.dataGridViewСorFactor1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MarkemNumber,
             this.CorrelationCoefficient});
-            this.dataGridViewСorFactor1.Location = new System.Drawing.Point(315, 23);
+            this.dataGridViewСorFactor1.Location = new System.Drawing.Point(277, 23);
             this.dataGridViewСorFactor1.Name = "dataGridViewСorFactor1";
             this.dataGridViewСorFactor1.ReadOnly = true;
             this.dataGridViewСorFactor1.Size = new System.Drawing.Size(187, 244);
@@ -622,7 +621,7 @@
             // lbMarkems2
             // 
             this.lbMarkems2.AutoSize = true;
-            this.lbMarkems2.Location = new System.Drawing.Point(538, 7);
+            this.lbMarkems2.Location = new System.Drawing.Point(471, 7);
             this.lbMarkems2.Name = "lbMarkems2";
             this.lbMarkems2.Size = new System.Drawing.Size(161, 13);
             this.lbMarkems2.TabIndex = 14;
@@ -647,10 +646,10 @@
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3});
-            this.dataGridViewMarkems2.Location = new System.Drawing.Point(541, 23);
+            this.dataGridViewMarkems2.Location = new System.Drawing.Point(474, 23);
             this.dataGridViewMarkems2.Name = "dataGridViewMarkems2";
             this.dataGridViewMarkems2.ReadOnly = true;
-            this.dataGridViewMarkems2.Size = new System.Drawing.Size(295, 301);
+            this.dataGridViewMarkems2.Size = new System.Drawing.Size(268, 301);
             this.dataGridViewMarkems2.TabIndex = 12;
             // 
             // dataGridViewMarkems1
@@ -666,7 +665,7 @@
             this.dataGridViewMarkems1.Location = new System.Drawing.Point(3, 23);
             this.dataGridViewMarkems1.Name = "dataGridViewMarkems1";
             this.dataGridViewMarkems1.ReadOnly = true;
-            this.dataGridViewMarkems1.Size = new System.Drawing.Size(306, 301);
+            this.dataGridViewMarkems1.Size = new System.Drawing.Size(268, 301);
             this.dataGridViewMarkems1.TabIndex = 11;
             // 
             // Markem
@@ -781,69 +780,84 @@
             this.экспериментальныхСловToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.экспериментальныхСловToolStripMenuItem.Text = "экспериментальные слова";
             // 
-            // важныхСловToolStripMenuItem
+            // важныеСловаToolStripMenuItem
             // 
-            this.важныхСловToolStripMenuItem.Name = "важныхСловToolStripMenuItem";
-            this.важныхСловToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.важныхСловToolStripMenuItem.Text = "важные слова";
+            this.важныеСловаToolStripMenuItem.Name = "важныеСловаToolStripMenuItem";
+            this.важныеСловаToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.важныеСловаToolStripMenuItem.Text = "важные слова";
+            this.важныеСловаToolStripMenuItem.Click += new System.EventHandler(this.важныеСловаToolStripMenuItem_Click);
             // 
-            // оппозитовToolStripMenuItem
+            // оппозитыToolStripMenuItem
             // 
-            this.оппозитовToolStripMenuItem.Name = "оппозитовToolStripMenuItem";
-            this.оппозитовToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.оппозитовToolStripMenuItem.Text = "оппозиты";
+            this.оппозитыToolStripMenuItem.Name = "оппозитыToolStripMenuItem";
+            this.оппозитыToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.оппозитыToolStripMenuItem.Text = "оппозиты";
+            this.оппозитыToolStripMenuItem.Click += new System.EventHandler(this.оппозитыToolStripMenuItem_Click);
             // 
-            // симиляровToolStripMenuItem
+            // симилярыToolStripMenuItem
             // 
-            this.симиляровToolStripMenuItem.Name = "симиляровToolStripMenuItem";
-            this.симиляровToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.симиляровToolStripMenuItem.Text = "симиляры";
+            this.симилярыToolStripMenuItem.Name = "симилярыToolStripMenuItem";
+            this.симилярыToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.симилярыToolStripMenuItem.Text = "симиляры";
+            this.симилярыToolStripMenuItem.Click += new System.EventHandler(this.симилярыToolStripMenuItem_Click);
             // 
-            // направленныхАссоциацийToolStripMenuItem
+            // направленныеАссоциацииToolStripMenuItem
             // 
-            this.направленныхАссоциацийToolStripMenuItem.Name = "направленныхАссоциацийToolStripMenuItem";
-            this.направленныхАссоциацийToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.направленныхАссоциацийToolStripMenuItem.Text = "направленные ассоциации";
+            this.направленныеАссоциацииToolStripMenuItem.Name = "направленныеАссоциацииToolStripMenuItem";
+            this.направленныеАссоциацииToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.направленныеАссоциацииToolStripMenuItem.Text = "направленные ассоциации";
+            this.направленныеАссоциацииToolStripMenuItem.Click += new System.EventHandler(this.направленныеАссоциацииToolStripMenuItem_Click);
             // 
-            // свободныхАссоциацийToolStripMenuItem
+            // свободныеАссоциацииToolStripMenuItem
             // 
-            this.свободныхАссоциацийToolStripMenuItem.Name = "свободныхАссоциацийToolStripMenuItem";
-            this.свободныхАссоциацийToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.свободныхАссоциацийToolStripMenuItem.Text = "свободные ассоциации";
+            this.свободныеАссоциацииToolStripMenuItem.Name = "свободныеАссоциацииToolStripMenuItem";
+            this.свободныеАссоциацииToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.свободныеАссоциацииToolStripMenuItem.Text = "свободные ассоциации";
+            this.свободныеАссоциацииToolStripMenuItem.Click += new System.EventHandler(this.свободныеАссоциацииToolStripMenuItem_Click);
             // 
-            // дефиницийToolStripMenuItem
+            // дефиницииToolStripMenuItem
             // 
-            this.дефиницийToolStripMenuItem.Name = "дефиницийToolStripMenuItem";
-            this.дефиницийToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.дефиницийToolStripMenuItem.Text = "дефиниции";
+            this.дефиницииToolStripMenuItem.Name = "дефиницииToolStripMenuItem";
+            this.дефиницииToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.дефиницииToolStripMenuItem.Text = "дефиниции";
+            this.дефиницииToolStripMenuItem.Click += new System.EventHandler(this.дефиницииToolStripMenuItem_Click);
             // 
             // маркемToolStripMenuItem
             // 
             this.маркемToolStripMenuItem.Name = "маркемToolStripMenuItem";
             this.маркемToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.маркемToolStripMenuItem.Text = "маркемы";
+            this.маркемToolStripMenuItem.Click += new System.EventHandler(this.маркемToolStripMenuItem_Click);
             // 
-            // иментальныхСловToolStripMenuItem
+            // экспериментальныеСловаToolStripMenuItem
             // 
-            this.иментальныхСловToolStripMenuItem.Name = "иментальныхСловToolStripMenuItem";
-            this.иментальныхСловToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            this.иментальныхСловToolStripMenuItem.Text = "экспериментальные слова";
+            this.экспериментальныеСловаToolStripMenuItem.Name = "экспериментальныеСловаToolStripMenuItem";
+            this.экспериментальныеСловаToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.экспериментальныеСловаToolStripMenuItem.Text = "экспериментальные слова";
+            this.экспериментальныеСловаToolStripMenuItem.Click += new System.EventHandler(this.экспериментальныеСловаToolStripMenuItem_Click);
             // 
             // загрузитьСписокToolStripMenuItem
             // 
             this.загрузитьСписокToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.иментальныхСловToolStripMenuItem,
+            this.экспериментальныеСловаToolStripMenuItem,
             this.маркемToolStripMenuItem,
-            this.дефиницийToolStripMenuItem,
-            this.свободныхАссоциацийToolStripMenuItem,
-            this.направленныхАссоциацийToolStripMenuItem,
-            this.симиляровToolStripMenuItem,
-            this.оппозитовToolStripMenuItem,
-            this.важныхСловToolStripMenuItem,
+            this.дефиницииToolStripMenuItem,
+            this.свободныеАссоциацииToolStripMenuItem,
+            this.направленныеАссоциацииToolStripMenuItem,
+            this.симилярыToolStripMenuItem,
+            this.оппозитыToolStripMenuItem,
+            this.важныеСловаToolStripMenuItem,
             this.текстДляАнализаToolStripMenuItem});
             this.загрузитьСписокToolStripMenuItem.Name = "загрузитьСписокToolStripMenuItem";
             this.загрузитьСписокToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
             this.загрузитьСписокToolStripMenuItem.Text = "Загрузить...";
+            // 
+            // текстДляАнализаToolStripMenuItem
+            // 
+            this.текстДляАнализаToolStripMenuItem.Name = "текстДляАнализаToolStripMenuItem";
+            this.текстДляАнализаToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.текстДляАнализаToolStripMenuItem.Text = "текст для анализа";
+            this.текстДляАнализаToolStripMenuItem.Click += new System.EventHandler(this.текстДляАнализаToolStripMenuItem_Click);
             // 
             // menuStrip
             // 
@@ -852,7 +866,7 @@
             this.просмотретьСписокToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1074, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1142, 24);
             this.menuStrip.TabIndex = 15;
             this.menuStrip.Text = "Меню";
             // 
@@ -871,10 +885,10 @@
             this.ShareOfMarkemsInAll,
             this.ShareOfImpWordsInContactors,
             this.StepsLevels});
-            this.dataGridViewAllWords.Location = new System.Drawing.Point(3, 6);
+            this.dataGridViewAllWords.Location = new System.Drawing.Point(6, 6);
             this.dataGridViewAllWords.Name = "dataGridViewAllWords";
             this.dataGridViewAllWords.ReadOnly = true;
-            this.dataGridViewAllWords.Size = new System.Drawing.Size(628, 318);
+            this.dataGridViewAllWords.Size = new System.Drawing.Size(589, 318);
             this.dataGridViewAllWords.TabIndex = 1;
             // 
             // ShareOfMarkemsInSwitches
@@ -923,7 +937,7 @@
             this.tbPageAllWords.Location = new System.Drawing.Point(4, 22);
             this.tbPageAllWords.Name = "tbPageAllWords";
             this.tbPageAllWords.Padding = new System.Windows.Forms.Padding(3);
-            this.tbPageAllWords.Size = new System.Drawing.Size(1042, 330);
+            this.tbPageAllWords.Size = new System.Drawing.Size(941, 330);
             this.tbPageAllWords.TabIndex = 0;
             this.tbPageAllWords.Text = "Экспериментальные слова";
             this.tbPageAllWords.UseVisualStyleBackColor = true;
@@ -938,10 +952,10 @@
             this.AsSwitch,
             this.AsContactor,
             this.AsSwitchAndContactor});
-            this.dataGridViewWords.Location = new System.Drawing.Point(637, 6);
+            this.dataGridViewWords.Location = new System.Drawing.Point(603, 6);
             this.dataGridViewWords.Name = "dataGridViewWords";
             this.dataGridViewWords.ReadOnly = true;
-            this.dataGridViewWords.Size = new System.Drawing.Size(398, 318);
+            this.dataGridViewWords.Size = new System.Drawing.Size(332, 318);
             this.dataGridViewWords.TabIndex = 3;
             // 
             // Word2
@@ -983,7 +997,7 @@
             this.tbControl.Location = new System.Drawing.Point(12, 27);
             this.tbControl.Name = "tbControl";
             this.tbControl.SelectedIndex = 0;
-            this.tbControl.Size = new System.Drawing.Size(1050, 356);
+            this.tbControl.Size = new System.Drawing.Size(949, 356);
             this.tbControl.TabIndex = 23;
             // 
             // tbPageDoubleOccurrence
@@ -991,7 +1005,7 @@
             this.tbPageDoubleOccurrence.Controls.Add(this.dgvCooccurrence);
             this.tbPageDoubleOccurrence.Location = new System.Drawing.Point(4, 22);
             this.tbPageDoubleOccurrence.Name = "tbPageDoubleOccurrence";
-            this.tbPageDoubleOccurrence.Size = new System.Drawing.Size(1042, 330);
+            this.tbPageDoubleOccurrence.Size = new System.Drawing.Size(941, 330);
             this.tbPageDoubleOccurrence.TabIndex = 4;
             this.tbPageDoubleOccurrence.Text = "Совместная встречаемость";
             this.tbPageDoubleOccurrence.UseVisualStyleBackColor = true;
@@ -1004,30 +1018,29 @@
             this.dgvCooccurrence.Location = new System.Drawing.Point(11, 13);
             this.dgvCooccurrence.Name = "dgvCooccurrence";
             this.dgvCooccurrence.ReadOnly = true;
-            this.dgvCooccurrence.Size = new System.Drawing.Size(639, 293);
+            this.dgvCooccurrence.Size = new System.Drawing.Size(918, 303);
             this.dgvCooccurrence.TabIndex = 2;
             // 
             // tbPageMultipleOccurrence
             // 
-            this.tbPageMultipleOccurrence.Controls.Add(this.button1);
             this.tbPageMultipleOccurrence.Controls.Add(this.tbxQuadrupleOccurrence);
             this.tbPageMultipleOccurrence.Controls.Add(this.tbxTripleOccurrence);
             this.tbPageMultipleOccurrence.Controls.Add(this.lblQuadrupleOccurrence);
             this.tbPageMultipleOccurrence.Controls.Add(this.lblTripleOccurrence);
             this.tbPageMultipleOccurrence.Location = new System.Drawing.Point(4, 22);
             this.tbPageMultipleOccurrence.Name = "tbPageMultipleOccurrence";
-            this.tbPageMultipleOccurrence.Size = new System.Drawing.Size(1042, 330);
+            this.tbPageMultipleOccurrence.Size = new System.Drawing.Size(941, 330);
             this.tbPageMultipleOccurrence.TabIndex = 5;
             this.tbPageMultipleOccurrence.Text = "Тройные и четверные встречаемости";
             this.tbPageMultipleOccurrence.UseVisualStyleBackColor = true;
             // 
             // tbxQuadrupleOccurrence
             // 
-            this.tbxQuadrupleOccurrence.Location = new System.Drawing.Point(345, 35);
+            this.tbxQuadrupleOccurrence.Location = new System.Drawing.Point(504, 35);
             this.tbxQuadrupleOccurrence.Multiline = true;
             this.tbxQuadrupleOccurrence.Name = "tbxQuadrupleOccurrence";
             this.tbxQuadrupleOccurrence.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbxQuadrupleOccurrence.Size = new System.Drawing.Size(301, 280);
+            this.tbxQuadrupleOccurrence.Size = new System.Drawing.Size(422, 280);
             this.tbxQuadrupleOccurrence.TabIndex = 7;
             // 
             // tbxTripleOccurrence
@@ -1036,13 +1049,13 @@
             this.tbxTripleOccurrence.Multiline = true;
             this.tbxTripleOccurrence.Name = "tbxTripleOccurrence";
             this.tbxTripleOccurrence.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbxTripleOccurrence.Size = new System.Drawing.Size(301, 280);
+            this.tbxTripleOccurrence.Size = new System.Drawing.Size(422, 280);
             this.tbxTripleOccurrence.TabIndex = 6;
             // 
             // lblQuadrupleOccurrence
             // 
             this.lblQuadrupleOccurrence.AutoSize = true;
-            this.lblQuadrupleOccurrence.Location = new System.Drawing.Point(342, 10);
+            this.lblQuadrupleOccurrence.Location = new System.Drawing.Point(501, 10);
             this.lblQuadrupleOccurrence.Name = "lblQuadrupleOccurrence";
             this.lblQuadrupleOccurrence.Size = new System.Drawing.Size(147, 13);
             this.lblQuadrupleOccurrence.TabIndex = 5;
@@ -1069,27 +1082,27 @@
             // btnSaveToExcel
             // 
             this.btnSaveToExcel.Enabled = false;
-            this.btnSaveToExcel.Location = new System.Drawing.Point(662, 432);
+            this.btnSaveToExcel.Location = new System.Drawing.Point(977, 242);
             this.btnSaveToExcel.Name = "btnSaveToExcel";
-            this.btnSaveToExcel.Size = new System.Drawing.Size(174, 47);
+            this.btnSaveToExcel.Size = new System.Drawing.Size(141, 47);
             this.btnSaveToExcel.TabIndex = 21;
             this.btnSaveToExcel.Text = "Экспортировать результаты в Excel";
             this.btnSaveToExcel.UseVisualStyleBackColor = true;
             // 
             // btnFieldsForAllWords
             // 
-            this.btnFieldsForAllWords.Location = new System.Drawing.Point(225, 432);
+            this.btnFieldsForAllWords.Location = new System.Drawing.Point(977, 112);
             this.btnFieldsForAllWords.Name = "btnFieldsForAllWords";
-            this.btnFieldsForAllWords.Size = new System.Drawing.Size(174, 47);
+            this.btnFieldsForAllWords.Size = new System.Drawing.Size(141, 47);
             this.btnFieldsForAllWords.TabIndex = 19;
             this.btnFieldsForAllWords.Text = "Построить поля для экспериментального списка";
             this.btnFieldsForAllWords.UseVisualStyleBackColor = true;
             // 
             // btnFieldForSelectedWord
             // 
-            this.btnFieldForSelectedWord.Location = new System.Drawing.Point(12, 432);
+            this.btnFieldForSelectedWord.Location = new System.Drawing.Point(977, 49);
             this.btnFieldForSelectedWord.Name = "btnFieldForSelectedWord";
-            this.btnFieldForSelectedWord.Size = new System.Drawing.Size(174, 47);
+            this.btnFieldForSelectedWord.Size = new System.Drawing.Size(141, 47);
             this.btnFieldForSelectedWord.TabIndex = 18;
             this.btnFieldForSelectedWord.Text = "Построить поле для выбранного слова";
             this.btnFieldForSelectedWord.UseMnemonic = false;
@@ -1109,14 +1122,14 @@
             this.comboBoxAllWords.FormattingEnabled = true;
             this.comboBoxAllWords.Location = new System.Drawing.Point(240, 394);
             this.comboBoxAllWords.Name = "comboBoxAllWords";
-            this.comboBoxAllWords.Size = new System.Drawing.Size(263, 21);
+            this.comboBoxAllWords.Size = new System.Drawing.Size(209, 21);
             this.comboBoxAllWords.TabIndex = 16;
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(884, 432);
+            this.btnClear.Location = new System.Drawing.Point(977, 317);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(174, 47);
+            this.btnClear.Size = new System.Drawing.Size(141, 47);
             this.btnClear.TabIndex = 20;
             this.btnClear.Text = "Очистить данные";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -1124,34 +1137,18 @@
             // btnCalculateCooccurrence
             // 
             this.btnCalculateCooccurrence.Enabled = false;
-            this.btnCalculateCooccurrence.Location = new System.Drawing.Point(444, 432);
+            this.btnCalculateCooccurrence.Location = new System.Drawing.Point(977, 175);
             this.btnCalculateCooccurrence.Name = "btnCalculateCooccurrence";
-            this.btnCalculateCooccurrence.Size = new System.Drawing.Size(174, 47);
+            this.btnCalculateCooccurrence.Size = new System.Drawing.Size(141, 47);
             this.btnCalculateCooccurrence.TabIndex = 9;
             this.btnCalculateCooccurrence.Text = "Рассчитать совместную встречаемость";
             this.btnCalculateCooccurrence.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(715, 172);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 44);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Экспортировать результаты в Excel";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // текстДляАнализаToolStripMenuItem
-            // 
-            this.текстДляАнализаToolStripMenuItem.Name = "текстДляАнализаToolStripMenuItem";
-            this.текстДляАнализаToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.текстДляАнализаToolStripMenuItem.Text = "текст для анализа";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1074, 507);
+            this.ClientSize = new System.Drawing.Size(1142, 425);
             this.Controls.Add(this.btnCalculateCooccurrence);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.tbControl);
@@ -1270,14 +1267,14 @@
         private System.Windows.Forms.ToolStripMenuItem маркемToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem просмотретьСписокToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem экспериментальныхСловToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem важныхСловToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem оппозитовToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem симиляровToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem направленныхАссоциацийToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem свободныхАссоциацийToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem дефиницийToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem важныеСловаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem оппозитыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem симилярыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem направленныеАссоциацииToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem свободныеАссоциацииToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem дефиницииToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem маркемToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem иментальныхСловToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem экспериментальныеСловаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem загрузитьСписокToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip;
         public System.Windows.Forms.DataGridView dataGridViewAllWords;
@@ -1307,7 +1304,6 @@
         private System.Windows.Forms.TextBox tbxTripleOccurrence;
         private System.Windows.Forms.Label lblQuadrupleOccurrence;
         private System.Windows.Forms.Label lblTripleOccurrence;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnCalculateCooccurrence;
         private System.Windows.Forms.ToolStripMenuItem текстДляАнализаToolStripMenuItem;
     }

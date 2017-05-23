@@ -32,7 +32,7 @@ namespace AnalysisOfKeywordsBehaviour
         /// </summary>
         public List<string> Similarities;
         /// <summary>
-        /// Опозиты.
+        /// Оппозиты.
         /// </summary>
         public List<string> Opposities;
         /// <summary>
@@ -97,7 +97,7 @@ namespace AnalysisOfKeywordsBehaviour
         /// <param name="freeAssociations">Список свободных ассоциаций.</param>
         /// <param name="directAssociations">Список направленных ассоциаций.</param>
         /// <param name="similarities">Список симиляров.</param>
-        /// <param name="opposities">Список опозитов.</param>
+        /// <param name="opposities">Список оппозитов.</param>
         /// <param name="importantWords">Список важных слов.</param>
         public FieldConstruction(List<string> allWords, List<string> definitions, List<string> freeAssociations, List<string> directAssociations, List<string> similarities, List<string> opposities, List<string> importantWords)
         {
@@ -297,7 +297,7 @@ namespace AnalysisOfKeywordsBehaviour
                 Field[Steps - 1][lev] = Field[Steps - 1][lev].Substring(0, LastInd);
             }
             else
-                //определяем, является ли слово-стимул опозитом
+                //определяем, является ли слово-стимул оппозитом
                 if (Field[Steps - 1][lev][LastInd] == '-')
             {
                 IsOp = true;
@@ -637,7 +637,7 @@ namespace AnalysisOfKeywordsBehaviour
                 }
                 down = true;
             }
-            //если стлово-стимул имеет опозит и оно само не является опозитом
+            //если стлово-стимул имеет оппозит и оно само не является оппозитом
             if (!IsOp && Opposities[index] != "-")
             {
                 if (AllUsedWords.IndexOf(Opposities[index]) != -1)
