@@ -89,5 +89,78 @@ namespace AnalysisOfKeywordsBehaviour
             }
             return true;
         }
+
+        /*параметр IsPart отвечает за то, вычисляется ли коэфф. корреляции для группы маркем,
+         состоящей из N маркем, или для всех маркем*/
+        /// <summary>
+        /// Вычисляет коэффициент корреляции двух рядов.
+        /// </summary>
+        /// <param name="matr1"></param>
+        /// <param name="matr2"></param>
+        /// <param name="k"></param>
+        /// <param name="IsPart"></param>
+        /// <returns>Возвращает коэффициент корреляции двух рядов с точностью до сотых.</returns>
+        public static double CalcCorretationFactor(int[] matr1, int[] matr2, int k, bool IsPart)
+        {
+            double SampleAvg1 = 0, SampleAvg2 = 0, Sum1 = 0, Sum2 = 0, Sum3 = 0;
+            if (IsPart)
+            {
+                //вычисляем коэффициент корреляции для группы маркем
+                for (int i = 0; i < Constants.NUM_OF_MARKEMS; i++)
+                {
+                    SampleAvg1 += matr1[k * Constants.NUM_OF_MARKEMS + i];
+                    SampleAvg2 += matr2[k * Constants.NUM_OF_MARKEMS + i];
+                }
+                SampleAvg1 = SampleAvg1 / Constants.NUM_OF_MARKEMS;
+                SampleAvg2 = SampleAvg2 / Constants.NUM_OF_MARKEMS;
+
+                for (int i = 0; i < Constants.NUM_OF_MARKEMS; i++)
+                {
+                    Sum1 += (matr1[k * Constants.NUM_OF_MARKEMS + i] - SampleAvg1) * (matr2[k * Constants.NUM_OF_MARKEMS + i] - SampleAvg2);
+                    Sum2 += Math.Pow((matr1[k * Constants.NUM_OF_MARKEMS + i] - SampleAvg1), 2);
+                    Sum3 += Math.Pow((matr2[k * Constants.NUM_OF_MARKEMS + i] - SampleAvg2), 2);
+                }
+            }
+            else
+            {
+                //вычисляем коэффициент корреляции для всех маркем
+                int n = matr1.Length;
+                for (int i = 0; i < n; i++)
+                {
+                    SampleAvg1 += matr1[i];
+                    SampleAvg2 += matr2[i];
+                }
+                SampleAvg1 = SampleAvg1 / n;
+                SampleAvg2 = SampleAvg2 / n;
+
+                for (int i = 0; i < n; i++)
+                {
+                    Sum1 += (matr1[i] - SampleAvg1) * (matr2[i] - SampleAvg2);
+                    Sum2 += Math.Pow((matr1[i] - SampleAvg1), 2);
+                    Sum3 += Math.Pow((matr2[i] - SampleAvg2), 2);
+                }
+            }
+            return Math.Round(Sum1 / Math.Sqrt(Sum2 * Sum3), 2);
+        }
+
+        public static string MakeString(List<string> list)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < list.Count - 1; i++)
+                sb.Append(list[i] + "-");
+            sb.Append(list[list.Count - 1]);
+            return sb.ToString();
+        }
+
+        public static string PrintMultipleOccurrences(Dictionary<string, float> multOccurrence)
+        {
+            StringBuilder output = new StringBuilder();
+            var items = from pair in multOccurrence
+                        orderby pair.Value descending
+                        select pair;
+            foreach (KeyValuePair<string, float> cont in items)
+                output.Append(cont.Key).Append(" - ").Append(Math.Round(cont.Value, 2).ToString()).Append(Environment.NewLine);
+            return output.ToString();
+        }
     }
 }

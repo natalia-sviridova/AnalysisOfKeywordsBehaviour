@@ -102,8 +102,8 @@ namespace AnalysisOfKeywordsBehaviour
                     break;
                 case 3:
                     _mainForm.FreeAssociations.Clear();
-                    for (int i = 0; i < textBox.Lines.Length; i++)
-                        _mainForm.FreeAssociations.Add(textBox.Lines[i]);
+                    for (int i = 0; i < tbx.Lines.Length; i++)
+                        _mainForm.FreeAssociations.Add(tbx.Lines[i]);
                     break;
                 case 4:
                     _mainForm.DirectAssociations.Clear();

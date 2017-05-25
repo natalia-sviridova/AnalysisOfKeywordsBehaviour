@@ -16,7 +16,9 @@ namespace AnalysisOfKeywordsBehaviour
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+
+            UnityFactory.Initialize();
+            Application.Run(UnityFactory.ResolveObject<MainForm>());
         }
     }
 }

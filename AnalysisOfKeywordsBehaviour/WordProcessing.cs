@@ -161,26 +161,6 @@ namespace AnalysisOfKeywordsBehaviour
             }
         }
 
-        private string MakeString(List<string> list)
-        {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < list.Count - 1; i++)
-                sb.Append(list[i] + "-");
-            sb.Append(list[list.Count - 1]);
-            return sb.ToString();
-        }
-
-        public string PrintMultipleOccurrences(Dictionary<string, float> multOccurrence)
-        {
-            StringBuilder output = new StringBuilder();
-            var items = from pair in multOccurrence
-                        orderby pair.Value descending
-                        select pair;
-            foreach (KeyValuePair<string, float> cont in items)
-                output.Append(cont.Key).Append(" - ").Append(Math.Round(cont.Value, 2).ToString()).Append(Environment.NewLine);
-            return output.ToString();
-        }
-
         /// <summary>
         /// Рассчитывает совместную встречаемость экспериментальных слов.
         /// </summary>
@@ -261,7 +241,7 @@ namespace AnalysisOfKeywordsBehaviour
                         for (int k = 0; k < comb.Length; k++)
                             words.Add(KeyWords[distinctFoundWords[comb[k]]]);
                         words = words.OrderBy(q => q).ToList();
-                        string str = MakeString(words);
+                        string str = Utility.MakeString(words);
                         if (TripleOccurrences.ContainsKey(str))
                             TripleOccurrences[str] += contexts[i].SizeCoeff;
                         else
@@ -277,7 +257,7 @@ namespace AnalysisOfKeywordsBehaviour
                         for (int k = 0; k < comb.Length; k++)
                             words.Add(KeyWords[distinctFoundWords[comb[k]]]);
                         words = words.OrderBy(q => q).ToList();
-                        string str = MakeString(words);
+                        string str = Utility.MakeString(words);
                         if (QuadrupleOccurrences.ContainsKey(str))
                             QuadrupleOccurrences[str] += contexts[i].SizeCoeff;
                         else

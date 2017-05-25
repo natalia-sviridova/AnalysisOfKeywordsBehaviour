@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tBCorFactor1 = new System.Windows.Forms.TextBox();
             this.tBAvgNumMarkemsAllNoMarkems = new System.Windows.Forms.TextBox();
             this.lbAvgNumMarkemsAllNoMarkems = new System.Windows.Forms.Label();
@@ -137,13 +138,15 @@
             this.lblQuadrupleOccurrence = new System.Windows.Forms.Label();
             this.lblTripleOccurrence = new System.Windows.Forms.Label();
             this.lbMarkems = new System.Windows.Forms.Label();
-            this.btnSaveToExcel = new System.Windows.Forms.Button();
+            this.btnExportToExcel = new System.Windows.Forms.Button();
             this.btnFieldsForAllWords = new System.Windows.Forms.Button();
             this.btnFieldForSelectedWord = new System.Windows.Forms.Button();
             this.lbWordForBuilding = new System.Windows.Forms.Label();
             this.comboBoxAllWords = new System.Windows.Forms.ComboBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnCalculateCooccurrence = new System.Windows.Forms.Button();
+            this.btnExportToWord = new System.Windows.Forms.Button();
+            this.tlTip = new System.Windows.Forms.ToolTip(this.components);
             this.tbPageRes.SuspendLayout();
             this.tbPageImportantWords.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewImportantWords)).BeginInit();
@@ -715,36 +718,42 @@
             this.важныхСловToolStripMenuItem1.Name = "важныхСловToolStripMenuItem1";
             this.важныхСловToolStripMenuItem1.Size = new System.Drawing.Size(224, 22);
             this.важныхСловToolStripMenuItem1.Text = "важные слова";
+            this.важныхСловToolStripMenuItem1.Click += new System.EventHandler(this.важныхСловToolStripMenuItem1_Click);
             // 
             // оппозитовToolStripMenuItem1
             // 
             this.оппозитовToolStripMenuItem1.Name = "оппозитовToolStripMenuItem1";
             this.оппозитовToolStripMenuItem1.Size = new System.Drawing.Size(224, 22);
             this.оппозитовToolStripMenuItem1.Text = "оппозиты";
+            this.оппозитовToolStripMenuItem1.Click += new System.EventHandler(this.оппозитовToolStripMenuItem1_Click);
             // 
             // симиляровToolStripMenuItem1
             // 
             this.симиляровToolStripMenuItem1.Name = "симиляровToolStripMenuItem1";
             this.симиляровToolStripMenuItem1.Size = new System.Drawing.Size(224, 22);
             this.симиляровToolStripMenuItem1.Text = "симиляры";
+            this.симиляровToolStripMenuItem1.Click += new System.EventHandler(this.симиляровToolStripMenuItem1_Click);
             // 
             // направленныхАссоциацийToolStripMenuItem1
             // 
             this.направленныхАссоциацийToolStripMenuItem1.Name = "направленныхАссоциацийToolStripMenuItem1";
             this.направленныхАссоциацийToolStripMenuItem1.Size = new System.Drawing.Size(224, 22);
             this.направленныхАссоциацийToolStripMenuItem1.Text = "направленные ассоциации";
+            this.направленныхАссоциацийToolStripMenuItem1.Click += new System.EventHandler(this.направленныхАссоциацийToolStripMenuItem1_Click);
             // 
             // свободныхАссоциацийToolStripMenuItem1
             // 
             this.свободныхАссоциацийToolStripMenuItem1.Name = "свободныхАссоциацийToolStripMenuItem1";
             this.свободныхАссоциацийToolStripMenuItem1.Size = new System.Drawing.Size(224, 22);
             this.свободныхАссоциацийToolStripMenuItem1.Text = "свободные ассоциации";
+            this.свободныхАссоциацийToolStripMenuItem1.Click += new System.EventHandler(this.свободныхАссоциацийToolStripMenuItem1_Click);
             // 
             // дефиницийToolStripMenuItem1
             // 
             this.дефиницийToolStripMenuItem1.Name = "дефиницийToolStripMenuItem1";
             this.дефиницийToolStripMenuItem1.Size = new System.Drawing.Size(224, 22);
             this.дефиницийToolStripMenuItem1.Text = "дефиниции";
+            this.дефиницийToolStripMenuItem1.Click += new System.EventHandler(this.дефиницийToolStripMenuItem1_Click);
             // 
             // NumOfSwAndCont
             // 
@@ -758,6 +767,7 @@
             this.маркемToolStripMenuItem1.Name = "маркемToolStripMenuItem1";
             this.маркемToolStripMenuItem1.Size = new System.Drawing.Size(224, 22);
             this.маркемToolStripMenuItem1.Text = "маркемы";
+            this.маркемToolStripMenuItem1.Click += new System.EventHandler(this.маркемToolStripMenuItem1_Click);
             // 
             // просмотретьСписокToolStripMenuItem
             // 
@@ -779,6 +789,7 @@
             this.экспериментальныхСловToolStripMenuItem.Name = "экспериментальныхСловToolStripMenuItem";
             this.экспериментальныхСловToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.экспериментальныхСловToolStripMenuItem.Text = "экспериментальные слова";
+            this.экспериментальныхСловToolStripMenuItem.Click += new System.EventHandler(this.экспериментальныхСловToolStripMenuItem_Click);
             // 
             // важныеСловаToolStripMenuItem
             // 
@@ -866,7 +877,7 @@
             this.просмотретьСписокToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1142, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1135, 24);
             this.menuStrip.TabIndex = 15;
             this.menuStrip.Text = "Меню";
             // 
@@ -1079,39 +1090,42 @@
             this.lbMarkems.TabIndex = 22;
             this.lbMarkems.Text = "Маркемы:";
             // 
-            // btnSaveToExcel
+            // btnExportToExcel
             // 
-            this.btnSaveToExcel.Enabled = false;
-            this.btnSaveToExcel.Location = new System.Drawing.Point(977, 242);
-            this.btnSaveToExcel.Name = "btnSaveToExcel";
-            this.btnSaveToExcel.Size = new System.Drawing.Size(141, 47);
-            this.btnSaveToExcel.TabIndex = 21;
-            this.btnSaveToExcel.Text = "Экспортировать результаты в Excel";
-            this.btnSaveToExcel.UseVisualStyleBackColor = true;
+            this.btnExportToExcel.Enabled = false;
+            this.btnExportToExcel.Location = new System.Drawing.Point(977, 224);
+            this.btnExportToExcel.Name = "btnExportToExcel";
+            this.btnExportToExcel.Size = new System.Drawing.Size(141, 37);
+            this.btnExportToExcel.TabIndex = 21;
+            this.btnExportToExcel.Text = "Экспортировать результаты в Excel";
+            this.btnExportToExcel.UseVisualStyleBackColor = true;
+            this.btnExportToExcel.Click += new System.EventHandler(this.btnExportToExcel_Click);
             // 
             // btnFieldsForAllWords
             // 
-            this.btnFieldsForAllWords.Location = new System.Drawing.Point(977, 112);
+            this.btnFieldsForAllWords.Location = new System.Drawing.Point(977, 110);
             this.btnFieldsForAllWords.Name = "btnFieldsForAllWords";
-            this.btnFieldsForAllWords.Size = new System.Drawing.Size(141, 47);
+            this.btnFieldsForAllWords.Size = new System.Drawing.Size(141, 37);
             this.btnFieldsForAllWords.TabIndex = 19;
             this.btnFieldsForAllWords.Text = "Построить поля для экспериментального списка";
             this.btnFieldsForAllWords.UseVisualStyleBackColor = true;
+            this.btnFieldsForAllWords.Click += new System.EventHandler(this.btnFieldsForAllWords_Click);
             // 
             // btnFieldForSelectedWord
             // 
             this.btnFieldForSelectedWord.Location = new System.Drawing.Point(977, 49);
             this.btnFieldForSelectedWord.Name = "btnFieldForSelectedWord";
-            this.btnFieldForSelectedWord.Size = new System.Drawing.Size(141, 47);
+            this.btnFieldForSelectedWord.Size = new System.Drawing.Size(141, 37);
             this.btnFieldForSelectedWord.TabIndex = 18;
             this.btnFieldForSelectedWord.Text = "Построить поле для выбранного слова";
             this.btnFieldForSelectedWord.UseMnemonic = false;
             this.btnFieldForSelectedWord.UseVisualStyleBackColor = true;
+            this.btnFieldForSelectedWord.Click += new System.EventHandler(this.btnFieldForSelectedWord_Click);
             // 
             // lbWordForBuilding
             // 
             this.lbWordForBuilding.AutoSize = true;
-            this.lbWordForBuilding.Location = new System.Drawing.Point(9, 397);
+            this.lbWordForBuilding.Location = new System.Drawing.Point(13, 397);
             this.lbWordForBuilding.Name = "lbWordForBuilding";
             this.lbWordForBuilding.Size = new System.Drawing.Size(222, 13);
             this.lbWordForBuilding.TabIndex = 17;
@@ -1127,38 +1141,52 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(977, 317);
+            this.btnClear.Location = new System.Drawing.Point(977, 342);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(141, 47);
+            this.btnClear.Size = new System.Drawing.Size(141, 37);
             this.btnClear.TabIndex = 20;
-            this.btnClear.Text = "Очистить данные";
+            this.btnClear.Text = "Очистить компоненты данных";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnCalculateCooccurrence
             // 
             this.btnCalculateCooccurrence.Enabled = false;
-            this.btnCalculateCooccurrence.Location = new System.Drawing.Point(977, 175);
+            this.btnCalculateCooccurrence.Location = new System.Drawing.Point(977, 167);
             this.btnCalculateCooccurrence.Name = "btnCalculateCooccurrence";
-            this.btnCalculateCooccurrence.Size = new System.Drawing.Size(141, 47);
+            this.btnCalculateCooccurrence.Size = new System.Drawing.Size(141, 37);
             this.btnCalculateCooccurrence.TabIndex = 9;
             this.btnCalculateCooccurrence.Text = "Рассчитать совместную встречаемость";
             this.btnCalculateCooccurrence.UseVisualStyleBackColor = true;
+            this.btnCalculateCooccurrence.Click += new System.EventHandler(this.btnCalculateCooccurrence_Click);
+            // 
+            // btnExportToWord
+            // 
+            this.btnExportToWord.Enabled = false;
+            this.btnExportToWord.Location = new System.Drawing.Point(977, 283);
+            this.btnExportToWord.Name = "btnExportToWord";
+            this.btnExportToWord.Size = new System.Drawing.Size(141, 37);
+            this.btnExportToWord.TabIndex = 24;
+            this.btnExportToWord.Text = "Экспортировать результаты в Word";
+            this.btnExportToWord.UseVisualStyleBackColor = true;
+            this.btnExportToWord.Click += new System.EventHandler(this.btnExportToWord_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1142, 425);
+            this.ClientSize = new System.Drawing.Size(1135, 425);
+            this.Controls.Add(this.btnExportToWord);
             this.Controls.Add(this.btnCalculateCooccurrence);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnExportToExcel);
+            this.Controls.Add(this.btnFieldsForAllWords);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.tbControl);
             this.Controls.Add(this.lbMarkems);
-            this.Controls.Add(this.btnSaveToExcel);
-            this.Controls.Add(this.btnFieldsForAllWords);
             this.Controls.Add(this.btnFieldForSelectedWord);
             this.Controls.Add(this.lbWordForBuilding);
             this.Controls.Add(this.comboBoxAllWords);
-            this.Controls.Add(this.btnClear);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1291,7 +1319,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AsSwitchAndContactor;
         private System.Windows.Forms.TabControl tbControl;
         private System.Windows.Forms.Label lbMarkems;
-        private System.Windows.Forms.Button btnSaveToExcel;
+        private System.Windows.Forms.Button btnExportToExcel;
         private System.Windows.Forms.Button btnFieldsForAllWords;
         private System.Windows.Forms.Button btnFieldForSelectedWord;
         private System.Windows.Forms.Label lbWordForBuilding;
@@ -1306,6 +1334,8 @@
         private System.Windows.Forms.Label lblTripleOccurrence;
         private System.Windows.Forms.Button btnCalculateCooccurrence;
         private System.Windows.Forms.ToolStripMenuItem текстДляАнализаToolStripMenuItem;
+        private System.Windows.Forms.Button btnExportToWord;
+        private System.Windows.Forms.ToolTip tlTip;
     }
 }
 
