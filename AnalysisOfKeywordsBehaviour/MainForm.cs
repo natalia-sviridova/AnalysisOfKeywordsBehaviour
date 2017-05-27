@@ -12,22 +12,22 @@ using System.Windows.Forms;
 namespace AnalysisOfKeywordsBehaviour
 {
     /// <summary>
-    /// Главная форма.
+    /// Главная форма приложения.
     /// </summary>
     public partial class MainForm : Form
     {
         /// <summary>
         /// Экземпляр класса по построению ассоциативного поля экспериментального слова.
         /// </summary>
-        private FieldConstruction _myfield;
+        private FieldConstruction _field;
         /// <summary>
         /// Экземпляр класса по обработке контекстов.
         /// </summary>
-        private TextProcessing _text;
+        private TextProcessing _textProc;
         /// <summary>
         /// Экземпляр класса по расчету совместной встречаемости экспериментальных слов.
         /// </summary>
-        private WordsProcessing _words;
+        private WordsProcessing _wordsProc;
         /// <summary>
         /// Интерфейс, экспортирующий полученные результаты.
         /// </summary>
@@ -63,13 +63,13 @@ namespace AnalysisOfKeywordsBehaviour
         public List<string> Opposities;
 
         /// <summary>
-        /// Проверяет, какие действия могут быть доступны пользователю во время простоя приложения.
+        /// Происходит, когда приложение заканчивает обработку и собирается перейти в состояние бездействия.
         /// </summary>
         void Idle(object sender, EventArgs e)
         {
             btnBuildFieldForSelectedWord.Enabled = (cmbAllWords.SelectedItem != null) && (AllWords.Count != 0) && (Markems.Count != 0) && (Definitions.Count != 0) && (FreeAssociations.Count != 0) && (DirectAssociations.Count != 0) && (Similarities.Count != 0) && (Opposities.Count != 0);
             btnBuildFieldsForAllWords.Enabled = (AllWords.Count != 0) && (Markems.Count != 0) && (Definitions.Count != 0) && (FreeAssociations.Count != 0) && (DirectAssociations.Count != 0) && (Similarities.Count != 0) && (Opposities.Count != 0);
-            btnCalculateCooccurrence.Enabled = (_text != null) && (_words != null);
+            btnCalculateCooccurrence.Enabled = (_textProc != null) && (_wordsProc != null);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace AnalysisOfKeywordsBehaviour
         /// Cчитывает данные из текстового файла в соответствующий список с экспериментальными данными.
         /// </summary>
         /// <param name="path">Путь к текстовому файлу, из которого необходимо считать экспериментальные данные.</param>
-        /// <param name="list">Список строк, куда заносится соответствующий список с экспериментальными данными.</param>
+        /// <param name="list">Список строк, куда необходимо занести экспериментальные данные.</param>
         private void FillInList(string path, List<string> list)
         {
             string[] lines = File.ReadAllLines(path, Constants.ENCODING);
@@ -113,8 +113,8 @@ namespace AnalysisOfKeywordsBehaviour
                 string fileName = openFD.FileName;
                 FillInList(fileName, AllWords);
 
-                _words = new WordsProcessing();
-                _words.ProcessWords(AllWords);
+                _wordsProc = new WordsProcessing();
+                _wordsProc.ProcessWords(AllWords);
 
                 cmbAllWords.Items.Clear();
                 dgvAllWords.Rows.Clear();
@@ -185,16 +185,14 @@ namespace AnalysisOfKeywordsBehaviour
         {
             if (openFD.ShowDialog() == DialogResult.OK)
             {
-                //Cursor = Cursors.WaitCursor;
                 string fileName = openFD.FileName;
-                _text = new TextProcessing();
-                _text.ProcessText(fileName);
-                //Cursor = Cursors.Default;
+                _textProc = new TextProcessing();
+                _textProc.ProcessText(fileName);
             }
         }
         //---------------------------------------------------------------------------------------------------//
 
-        /*набор методов, предназначенный для вызова вспомогательной формы для изменения соответствующего списка экспериментальных данных в GUI-приложении*/
+        /*набор методов, предназначенный для вызова вспомогательной формы для изменения соответствующего списка экспериментальных данных*/
         //---------------------------------------------------------------------------------------------------//
         private void экспериментальныхСловToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -280,19 +278,20 @@ namespace AnalysisOfKeywordsBehaviour
         /// </summary>
         private void btnFieldForSelectedWord_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
             //проверяем списки с экспериментальными данными на корректность длины
             if (CheckLists())
             {
                 dgvWords.Rows.Clear();
                 int index = AllWords.IndexOf(cmbAllWords.SelectedItem.ToString());
-                _myfield = new FieldConstruction(AllWords, Definitions, FreeAssociations, DirectAssociations, Similarities, Opposities);
-                _myfield.InitField(cmbAllWords.SelectedItem.ToString());    //строим ассоциативное поле для выбранного слова
+                _field = new FieldConstruction(AllWords, Definitions, FreeAssociations, DirectAssociations, Similarities, Opposities);
+                _field.InitField(cmbAllWords.SelectedItem.ToString());    //строим ассоциативное поле для выбранного слова
 
                 //инициализируем параметры ассоциативного поля
                 int NumOfSwitches = 0;
                 int NumOfAllSwitches = 0;
-                int NumOfContactors = _myfield.Contactors.Count;
-                int NumOfAllContactors = _myfield.NumOfContactors;
+                int NumOfContactors = _field.Contactors.Count;
+                int NumOfAllContactors = _field.NumOfContactors;
                 double NumOfSwAmongMarkems = 0;
                 double NumOfConAmongMarkems = 0;
                 double NumOfAllSwAmongMarkems = 0;
@@ -300,23 +299,23 @@ namespace AnalysisOfKeywordsBehaviour
                 //вычисляем параметры
                 for (int i = 0; i < AllWords.Count; i++)
                 {
-                    if (_myfield.AllWordsAsSwitches[AllWords[i]] != 0 || _myfield.AllWordsAsContactors[AllWords[i]] != 0)
+                    if (_field.AllWordsAsSwitches[AllWords[i]] != 0 || _field.AllWordsAsContactors[AllWords[i]] != 0)
                     {
-                        dgvWords.Rows.Add(AllWords[i], _myfield.AllWordsAsSwitches[AllWords[i]], _myfield.AllWordsAsContactors[AllWords[i]], _myfield.AllWordsAsSwitches[AllWords[i]] + _myfield.AllWordsAsContactors[AllWords[i]]);
-                        if (_myfield.AllWordsAsSwitches[AllWords[i]] != 0)
+                        dgvWords.Rows.Add(AllWords[i], _field.AllWordsAsSwitches[AllWords[i]], _field.AllWordsAsContactors[AllWords[i]], _field.AllWordsAsSwitches[AllWords[i]] + _field.AllWordsAsContactors[AllWords[i]]);
+                        if (_field.AllWordsAsSwitches[AllWords[i]] != 0)
                         {
                             NumOfSwitches++;
-                            NumOfAllSwitches += _myfield.AllWordsAsSwitches[AllWords[i]];
+                            NumOfAllSwitches += _field.AllWordsAsSwitches[AllWords[i]];
                             if (Markems.IndexOf(AllWords[i]) != -1)
                             {
                                 NumOfSwAmongMarkems++;
-                                NumOfAllSwAmongMarkems += _myfield.AllWordsAsSwitches[AllWords[i]];
+                                NumOfAllSwAmongMarkems += _field.AllWordsAsSwitches[AllWords[i]];
                             }
                         }
-                        if (_myfield.AllWordsAsContactors[AllWords[i]] != 0 && Markems.IndexOf(AllWords[i]) != -1)
+                        if (_field.AllWordsAsContactors[AllWords[i]] != 0 && Markems.IndexOf(AllWords[i]) != -1)
                         {
                             NumOfConAmongMarkems++;
-                            NumOfAllConAmongMarkems += _myfield.AllWordsAsContactors[AllWords[i]];
+                            NumOfAllConAmongMarkems += _field.AllWordsAsContactors[AllWords[i]];
                         }
                     }
                 }
@@ -367,10 +366,10 @@ namespace AnalysisOfKeywordsBehaviour
                 dgvAllWords.Rows[index].Cells[4].Value = String.Format("{0:0.00}", ShareOfMarkemsInSwitches) + " (" + String.Format("{0:0.00}", ShareOfMarkemsInAllSwitches) + ")";
                 dgvAllWords.Rows[index].Cells[5].Value = String.Format("{0:0.00}", ShareOfMarkemsInContactors) + " (" + String.Format("{0:0.00}", ShareOfMarkemsInAllContactors) + ")";
                 dgvAllWords.Rows[index].Cells[6].Value = String.Format("{0:0.00}", ShareOfMarkemsInAll) + " (" + String.Format("{0:0.00}", ShareOfAllMarkemsInAll) + ")";
-                if (_myfield.Steps == 0)
-                    dgvAllWords.Rows[index].Cells[8].Value = (_myfield.Steps) + " " + (_myfield.Levels);
+                if (_field.Steps == 0)
+                    dgvAllWords.Rows[index].Cells[8].Value = (_field.Steps) + " " + (_field.Levels);
                 else
-                    dgvAllWords.Rows[index].Cells[8].Value = (_myfield.Steps) + " " + (_myfield.Levels + 1);
+                    dgvAllWords.Rows[index].Cells[8].Value = (_field.Steps) + " " + (_field.Levels + 1);
                 btnExportToExcel.Enabled = true;
                 dgvAllWords.Rows[index].Selected = true;
                 dgvAllWords.FirstDisplayedScrollingRowIndex = index;
@@ -381,8 +380,9 @@ namespace AnalysisOfKeywordsBehaviour
                                      MessageBoxButtons.YesNo);
                 //если пользователь отвечает "да", то полученное поле экспортируем в таблицу MS Excel
                 if (confirmResult == DialogResult.Yes)
-                    _resultWriter.ExportField(_myfield.Field);
+                    _resultWriter.ExportField(_field.Field);
             }
+            Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -390,6 +390,7 @@ namespace AnalysisOfKeywordsBehaviour
         /// </summary>
         private void btnFieldsForAllWords_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
             //проверяем списки с экспериментальными данными на корректность длины
             if (CheckLists())
             {
@@ -439,16 +440,16 @@ namespace AnalysisOfKeywordsBehaviour
                 double NumMarkemsAllNoMarkems = 0;
                 double NumAllMarkemsAllNoMarkems = 0;
 
-                _myfield = new FieldConstruction(AllWords, Definitions, DirectAssociations, FreeAssociations, Similarities, Opposities);
+                _field = new FieldConstruction(AllWords, Definitions, DirectAssociations, FreeAssociations, Similarities, Opposities);
                 //строим ассоциативное поле для каждого слова из экспериментального списка
                 for (int k = 0; k < AllWords.Count; k++)
                 {
-                    _myfield.InitField(AllWords[k]);    //строим ассоциативное поле для выбранного слова
+                    _field.InitField(AllWords[k]);    //строим ассоциативное поле для выбранного слова
                     //инициализируем параметры ассоциативного поля
                     int NumOfSwitches = 0;
                     int NumOfAllSwitches = 0;
-                    int NumOfContactors = _myfield.Contactors.Count;
-                    int NumOfAllContactors = _myfield.NumOfContactors;
+                    int NumOfContactors = _field.Contactors.Count;
+                    int NumOfAllContactors = _field.NumOfContactors;
                     double NumOfSwAmongMarkems = 0;
                     double NumOfConAmongMarkems = 0;
                     double NumOfAllSwAmongMarkems = 0;
@@ -457,32 +458,32 @@ namespace AnalysisOfKeywordsBehaviour
                     //вычисляем параметры
                     for (int i = 0; i < AllWords.Count; i++)
                     {
-                        if (_myfield.AllWordsAsSwitches[AllWords[i]] != 0 || _myfield.AllWordsAsContactors[AllWords[i]] != 0)
+                        if (_field.AllWordsAsSwitches[AllWords[i]] != 0 || _field.AllWordsAsContactors[AllWords[i]] != 0)
                         {
-                            dgvWords.Rows[i].Cells[1].Value = (int)dgvWords.Rows[i].Cells[1].Value + _myfield.AllWordsAsSwitches[AllWords[i]];
-                            dgvWords.Rows[i].Cells[2].Value = (int)dgvWords.Rows[i].Cells[2].Value + _myfield.AllWordsAsContactors[AllWords[i]];
-                            dgvWords.Rows[i].Cells[3].Value = (int)dgvWords.Rows[i].Cells[3].Value + _myfield.AllWordsAsSwitches[AllWords[i]] + _myfield.AllWordsAsContactors[AllWords[i]];
+                            dgvWords.Rows[i].Cells[1].Value = (int)dgvWords.Rows[i].Cells[1].Value + _field.AllWordsAsSwitches[AllWords[i]];
+                            dgvWords.Rows[i].Cells[2].Value = (int)dgvWords.Rows[i].Cells[2].Value + _field.AllWordsAsContactors[AllWords[i]];
+                            dgvWords.Rows[i].Cells[3].Value = (int)dgvWords.Rows[i].Cells[3].Value + _field.AllWordsAsSwitches[AllWords[i]] + _field.AllWordsAsContactors[AllWords[i]];
 
                             int ind = Markems.IndexOf(AllWords[i]);
                             if (ind != -1)
                             {
-                                Markems1[ind] += _myfield.AllWordsAsContactors[AllWords[i]];
-                                Markems2[ind] += _myfield.AllWordsAsSwitches[AllWords[i]] + _myfield.AllWordsAsContactors[AllWords[i]];
+                                Markems1[ind] += _field.AllWordsAsContactors[AllWords[i]];
+                                Markems2[ind] += _field.AllWordsAsSwitches[AllWords[i]] + _field.AllWordsAsContactors[AllWords[i]];
                             }
-                            if (_myfield.AllWordsAsSwitches[AllWords[i]] != 0)
+                            if (_field.AllWordsAsSwitches[AllWords[i]] != 0)
                             {
                                 NumOfSwitches++;
-                                NumOfAllSwitches += _myfield.AllWordsAsSwitches[AllWords[i]];
+                                NumOfAllSwitches += _field.AllWordsAsSwitches[AllWords[i]];
                                 if (ind != -1)
                                 {
                                     NumOfSwAmongMarkems++;
-                                    NumOfAllSwAmongMarkems += _myfield.AllWordsAsSwitches[AllWords[i]];
+                                    NumOfAllSwAmongMarkems += _field.AllWordsAsSwitches[AllWords[i]];
                                 }
                             }
-                            if ((_myfield.AllWordsAsContactors[AllWords[i]] != 0) && (ind != -1))
+                            if ((_field.AllWordsAsContactors[AllWords[i]] != 0) && (ind != -1))
                             {
                                 NumOfConAmongMarkems++;
-                                NumOfAllConAmongMarkems += _myfield.AllWordsAsContactors[AllWords[i]];
+                                NumOfAllConAmongMarkems += _field.AllWordsAsContactors[AllWords[i]];
                             }
                         }
                     }
@@ -566,10 +567,10 @@ namespace AnalysisOfKeywordsBehaviour
                     dgvAllWords.Rows[k].Cells[4].Value = String.Format("{0:0.00}", ShareOfMarkemsInSwitches) + " (" + String.Format("{0:0.00}", ShareOfMarkemsInAllSwitches) + ")";
                     dgvAllWords.Rows[k].Cells[5].Value = String.Format("{0:0.00}", ShareOfMarkemsInContactors) + " (" + String.Format("{0:0.00}", ShareOfMarkemsInAllContactors) + ")";
                     dgvAllWords.Rows[k].Cells[6].Value = String.Format("{0:0.00}", ShareOfMarkemsInAll) + " (" + String.Format("{0:0.00}", ShareOfAllMarkemsInAll) + ")";
-                    if (_myfield.Steps == 0)
-                        dgvAllWords.Rows[k].Cells[8].Value = (_myfield.Steps) + " " + (_myfield.Levels);
+                    if (_field.Steps == 0)
+                        dgvAllWords.Rows[k].Cells[8].Value = (_field.Steps) + " " + (_field.Levels);
                     else
-                        dgvAllWords.Rows[k].Cells[8].Value = (_myfield.Steps) + " " + (_myfield.Levels + 1);
+                        dgvAllWords.Rows[k].Cells[8].Value = (_field.Steps) + " " + (_field.Levels + 1);
                 }
 
                 int[] MarkemsRang = new int[Markems.Count];
@@ -584,7 +585,8 @@ namespace AnalysisOfKeywordsBehaviour
 
                 /*вычисляем коэффициенты корреляции между рангами и частотами встречаемости маркем
                   и выводим полученные коэффициенты в DataGridView*/
-                for (int i = 0; i < 5; i++)
+                int numOfGroups = Markems.Count / Constants.NUM_OF_MARKEMS;
+                for (int i = 0; i < numOfGroups; i++)
                 {
                     dgvСorFactor1.Rows.Add(i * 10 + 1 + " - " + (i + 1) * 10, Utility.CalcCorretationFactor(MarkemsRang, Markems1, i, true));
                     dgvСorFactor2.Rows.Add(i * 10 + 1 + " - " + (i + 1) * 10, Utility.CalcCorretationFactor(MarkemsRang, Markems2, i, true));
@@ -610,6 +612,7 @@ namespace AnalysisOfKeywordsBehaviour
                 btnExportToExcel.Enabled = true;
                 dgvAllWords.FirstDisplayedScrollingRowIndex = 0;
             }
+            Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -617,36 +620,40 @@ namespace AnalysisOfKeywordsBehaviour
         /// </summary>
         private void btnCalculateCooccurrence_Click(object sender, EventArgs e)
         {
-            _words.CountingOfCoOccurrence(_text.Contexts);
+            Cursor = Cursors.WaitCursor;
+            _wordsProc.CountingOfCoOccurrence(_textProc.Contexts);
 
-            dgvCooccurrence.ColumnCount = _words.KeyWords.Count + 1;
-            dgvCooccurrence.RowCount = _words.KeyWords.Count + 2;
-            for (int i = 0; i < _words.KeyWords.Count; i++)
+            dgvCooccurrence.ColumnCount = _wordsProc.KeyWords.Count + 1;
+            dgvCooccurrence.RowCount = _wordsProc.KeyWords.Count + 2;
+
+            for (int i = 0; i < _wordsProc.KeyWords.Count; i++)
             {
-                dgvCooccurrence.Rows[0].Cells[i + 1].Value = _words.KeyWords[i];
-                dgvCooccurrence.Rows[i + 1].Cells[0].Value = _words.KeyWords[i] + " " + _words.PrintRepetitions(i);
+                dgvCooccurrence.Rows[0].Cells[i + 1].Value = _wordsProc.KeyWords[i];
+                dgvCooccurrence.Rows[i + 1].Cells[0].Value = _wordsProc.KeyWords[i] + " " + _wordsProc.PrintRepetitions(i);
             }
-            for (int i = 0; i < _words.KeyWords.Count; i++)
-                for (int j = 0; j < _words.KeyWords.Count; j++)
-                    if (i >= j)
-                        dgvCooccurrence.Rows[i + 1].Cells[j + 1].Value = _words.TableOfCooccurrence[i, j].Print();
 
-            dgvCooccurrence.Rows[_words.KeyWords.Count + 1].Cells[0].Value = "Среднее количество встреч";
+            for (int i = 0; i < _wordsProc.KeyWords.Count; i++)
+                for (int j = 0; j < _wordsProc.KeyWords.Count; j++)
+                    if (i >= j)
+                        dgvCooccurrence.Rows[i + 1].Cells[j + 1].Value = _wordsProc.TableOfCooccurrence[i, j].Print();
+
+            dgvCooccurrence.Rows[_wordsProc.KeyWords.Count + 1].Cells[0].Value = "Среднее количество встреч:";
             float sum;
-            for (int k = 0; k < _words.KeyWords.Count; k++)
+            for (int k = 0; k < _wordsProc.KeyWords.Count; k++)
             {
                 sum = 0;
                 for (int j = 0; j < k; j++)
-                    sum += _words.TableOfCooccurrence[k, j].CooccurCoeff;
-                for (int i = k + 1; i < _words.KeyWords.Count; i++)
-                    sum += _words.TableOfCooccurrence[i, k].CooccurCoeff;
-                dgvCooccurrence.Rows[_words.KeyWords.Count + 1].Cells[k + 1].Value = Math.Round(sum / _text.Contexts.Count, 2);
+                    sum += _wordsProc.TableOfCooccurrence[k, j].CooccurCoeff;
+                for (int i = k + 1; i < _wordsProc.KeyWords.Count; i++)
+                    sum += _wordsProc.TableOfCooccurrence[i, k].CooccurCoeff;
+                dgvCooccurrence.Rows[_wordsProc.KeyWords.Count + 1].Cells[k + 1].Value = Math.Round(sum / _textProc.Contexts.Count, 2);
             }
 
-            tbxTripleOccurrence.Text = Utility.PrintMultipleOccurrences(_words.TripleOccurrences);
-            tbxQuadrupleOccurrence.Text += Utility.PrintMultipleOccurrences(_words.QuadrupleOccurrences);
+            tbxTripleOccurrence.Text = Utility.PrintMultipleOccurrences(_wordsProc.TripleOccurrences);
+            tbxQuadrupleOccurrence.Text += Utility.PrintMultipleOccurrences(_wordsProc.QuadrupleOccurrences);
 
             btnExportToWord.Enabled = true;
+            Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -654,7 +661,9 @@ namespace AnalysisOfKeywordsBehaviour
         /// </summary>
         private void btnExportToExcel_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
             _resultWriter.ExportTables(dgvAllWords, dgvWords, dgvMarkems1, dgvСorFactor1, tbxCorFactor1.Text, dgvMarkems2, dgvСorFactor2, tbxCorFactor2.Text, dgvCooccurrence, tbxAvgNumSwitInMarkems.Text, tbxAvgNumConcInMarkems.Text, tbxAvgNumAllInMarkems.Text, tbxAvgNumSwitInNoMarkems.Text, tbxAvgNumConcInNoMarkems.Text, tbxAvgNumAllInNoMarkems.Text, tbxAvgNumMarkemsSwitMarkems.Text, tbxAvgNumMarkemsConcMarkems.Text, tbxAvgNumMarkemsAllMarkems.Text, tbxAvgNumMarkemsSwitNoMarkems.Text, tbxAvgNumMarkemsConcNoMarkems.Text, tbxAvgNumMarkemsAllNoMarkems.Text);
+            Cursor = Cursors.Default;
         }
 
         /// <summary>
@@ -662,8 +671,10 @@ namespace AnalysisOfKeywordsBehaviour
         /// </summary>
         private void btnExportToWord_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
             _resultWriter.ExportText(tbxTripleOccurrence.Text);
             _resultWriter.ExportText(tbxQuadrupleOccurrence.Text);
+            Cursor = Cursors.Default;
         }
 
         /// <summary>

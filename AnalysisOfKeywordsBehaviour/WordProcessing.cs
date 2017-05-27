@@ -132,7 +132,7 @@ namespace AnalysisOfKeywordsBehaviour
             for (int i = 0; i < words.Count; i++)
             {
                 string wordsForms = BuildNounForms(Nouns.FindSimilar(words[i]));
-                _words.Add(wordsForms.Split(Constants.SPLITTERS, StringSplitOptions.RemoveEmptyEntries).ToList());
+                _words.Add(Utility.SplitExpression(wordsForms).ToList());
             }
             Repetitions = new SortedDictionary<int, int>[KeyWords.Count];
             TableOfCooccurrence = new Cooccurrence[KeyWords.Count, KeyWords.Count];

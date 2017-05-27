@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace AnalysisOfKeywordsBehaviour
 {
+    /// <summary>
+    /// Предоставляет методы для работы с Unity-контейнером.
+    /// </summary>
     public static class UnityFactory
     {
         private static IUnityContainer _container;

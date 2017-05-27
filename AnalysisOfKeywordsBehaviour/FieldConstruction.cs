@@ -132,17 +132,6 @@ namespace AnalysisOfKeywordsBehaviour
         }
 
         /// <summary>
-        /// Разбивает строку на отдельные лексемы по символам, служащим в качестве разделителей.
-        /// </summary>
-        /// <param name="exp">Строка для разделения.</param>
-        /// <returns>Возвращает массив лексем.</returns>
-        private string[] SplitExpression(string exp)
-        {
-            string[] arr = exp.Split(Constants.SPLITTERS, StringSplitOptions.RemoveEmptyEntries);
-            return arr;
-        }
-
-        /// <summary>
         /// Добавляет одну ступень в конец ассоциативного поля.
         /// </summary>
         private void AddLevel()
@@ -297,7 +286,7 @@ namespace AnalysisOfKeywordsBehaviour
             if (Definitions[index] != "-")
             {
                 added = false;
-                string[] words = SplitExpression(Definitions[index]);
+                string[] words = Utility.SplitExpression(Definitions[index]);
                 foreach (string word in words)
                     if (AllUsedWords.IndexOf(word) != -1)
                     {
@@ -370,7 +359,7 @@ namespace AnalysisOfKeywordsBehaviour
             if (FreeAssociations[index] != "-")
             {
                 added = false;
-                string[] words = SplitExpression(FreeAssociations[index]);
+                string[] words = Utility.SplitExpression(FreeAssociations[index]);
                 foreach (string word in words)
                     if (AllUsedWords.IndexOf(word) != -1)
                     {
@@ -476,7 +465,7 @@ namespace AnalysisOfKeywordsBehaviour
             if (DirectAssociations[index] != "-")
             {
                 added = false;
-                string[] words = SplitExpression(DirectAssociations[index]);
+                string[] words = Utility.SplitExpression(DirectAssociations[index]);
                 foreach (string word in words)
                     if (AllUsedWords.IndexOf(word) != -1)
                     {
@@ -578,7 +567,7 @@ namespace AnalysisOfKeywordsBehaviour
                         }
                     }
             }
-            //если стлово-стимул имеет симиляр и оно само не являлось симиляром
+            //если стлово-стимул имеет симиляр и оно само не являлось симиляром на предыдущем шаге
             if (!IsSim && Similarities[index] != "-")
             {
                 if (AllUsedWords.IndexOf(Similarities[index]) != -1)
@@ -611,7 +600,7 @@ namespace AnalysisOfKeywordsBehaviour
                 }
                 down = true;
             }
-            //если стлово-стимул имеет оппозит и оно само не является оппозитом
+            //если стлово-стимул имеет оппозит и оно само не является оппозитом на предыдущем шаге
             if (!IsOp && Opposities[index] != "-")
             {
                 if (AllUsedWords.IndexOf(Opposities[index]) != -1)

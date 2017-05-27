@@ -98,10 +98,10 @@ namespace AnalysisOfKeywordsBehaviour
         /// <summary>
         /// Вычисляет коэффициент корреляции двух рядов.
         /// </summary>
-        /// <param name="matr1"></param>
-        /// <param name="matr2"></param>
-        /// <param name="k"></param>
-        /// <param name="IsPart"></param>
+        /// <param name="matr1">Первый ряд.</param>
+        /// <param name="matr2">Второй ряд.</param>
+        /// <param name="k">Номер группы маркем.</param>
+        /// <param name="IsPart">Если true, то будет вычисляеться коэфф. корреляции для группы из N маркем, если false - то для всех маркем.</param>
         /// <returns>Возвращает коэффициент корреляции двух рядов с точностью до сотых.</returns>
         public static double CalcCorretationFactor(int[] matr1, int[] matr2, int k, bool IsPart)
         {
@@ -164,7 +164,7 @@ namespace AnalysisOfKeywordsBehaviour
         /// Выводит тройные/четверные встречаемости.
         /// </summary>
         /// <param name="multOccurrence">Словарь с тройными/четверными встречаемостями.</param>
-        /// <returns>Возвращает строку, состоящую из всех тройных/четверных встречаемостях.</returns>
+        /// <returns>Возвращает строку, состоящую из всех тройных/четверных встречаемостей.</returns>
         public static string PrintMultipleOccurrences(Dictionary<string, float> multOccurrence)
         {
             StringBuilder output = new StringBuilder();
@@ -174,6 +174,17 @@ namespace AnalysisOfKeywordsBehaviour
             foreach (KeyValuePair<string, float> cont in items)
                 output.Append(cont.Key).Append(" - ").Append(Math.Round(cont.Value, 2).ToString()).Append(Environment.NewLine);
             return output.ToString();
+        }
+
+        /// <summary>
+        /// Разбивает строку на отдельные лексемы по символам, служащим в качестве разделителей.
+        /// </summary>
+        /// <param name="exp">Строка для разделения.</param>
+        /// <returns>Возвращает массив лексем.</returns>
+        public static string[] SplitExpression(string exp)
+        {
+            string[] arr = exp.Split(Constants.SPLITTERS, StringSplitOptions.RemoveEmptyEntries);
+            return arr;
         }
     }
 }

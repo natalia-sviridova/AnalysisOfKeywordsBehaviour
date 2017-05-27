@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace AnalysisOfKeywordsBehaviour
 {
+    /// <summary>
+    /// Вспомогательная форма для редактирования списков с экспериментальными данными.
+    /// </summary>
     public partial class HelpForm : Form
     {
         /// <summary>
@@ -17,7 +20,7 @@ namespace AnalysisOfKeywordsBehaviour
         /// </summary>
         private MainForm _mainForm;
         /// <summary>
-        /// Номер списка с экспериментальными данными.
+        /// Номер списка с экспериментальными данными, который необходимо редактировать.
         /// </summary>
         private int _numOfList;
 
@@ -25,7 +28,7 @@ namespace AnalysisOfKeywordsBehaviour
         /// Конструктор класса.
         /// </summary>
         /// <param name="mainForm">Главная (родительская) форма.</param>
-        /// <param name="numOfList">Номер списка с экспериментальными данными, которые необходимо изменить.</param>
+        /// <param name="numOfList">Номер списка с экспериментальными данными, которые необходимо редактировать.</param>
         public HelpForm(MainForm mainForm, int numOfList)
         {
             InitializeComponent();
@@ -61,10 +64,6 @@ namespace AnalysisOfKeywordsBehaviour
                     break;
                 case 6:
                     foreach (string word in _mainForm.Opposities)
-                        tbx.Text += word + Environment.NewLine;
-                    break;
-                case 7:
-                    foreach (string word in _mainForm.ImportantWords)
                         tbx.Text += word + Environment.NewLine;
                     break;
             }
@@ -119,11 +118,6 @@ namespace AnalysisOfKeywordsBehaviour
                     _mainForm.Opposities.Clear();
                     for (int i = 0; i < tbx.Lines.Length; i++)
                         _mainForm.Opposities.Add(tbx.Lines[i]);
-                    break;
-                case 7:
-                    _mainForm.ImportantWords.Clear();
-                    for (int i = 0; i < tbx.Lines.Length; i++)
-                        _mainForm.ImportantWords.Add(tbx.Lines[i]);
                     break;
             }
             Close();

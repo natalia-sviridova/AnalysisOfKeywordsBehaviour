@@ -9,12 +9,12 @@ using System.Windows.Forms;
 namespace AnalysisOfKeywordsBehaviour
 {
     /// <summary>
-    /// Экспорт результатов в MS Office.
+    /// Предоставляет методы для экспорта полученных результатов в MS Office.
     /// </summary>
     class ResultWriterToMSOffice : IResultWriter
     {
         /// <summary>
-        /// Экспортирует результаты построения ассоциативных полей в MS Excel.
+        /// Экспортирует итоговые параметры полученных ассоциативных полей в MS Excel.
         /// </summary>
         public void ExportTables(DataGridView source1, DataGridView source2, DataGridView source3, DataGridView source4, string CorFactor1, DataGridView source5, DataGridView source6, string CorFactor2, DataGridView source7, string str1, string str2, string str3, string str4, string str5, string str6, string str7, string str8, string str9, string str10, string str11, string str12)
         {
@@ -30,8 +30,7 @@ namespace AnalysisOfKeywordsBehaviour
             workSheet1.Cells[1, 5] = "Доля маркем в переключателях";
             workSheet1.Cells[1, 6] = "Доля маркем в замыкателях";
             workSheet1.Cells[1, 7] = "Доля маркем в переключателях+замыкателях";
-            workSheet1.Cells[1, 8] = "Доля важных слов в замыкателях";
-            workSheet1.Cells[1, 9] = "Шаги : ступени";
+            workSheet1.Cells[1, 8] = "Шаги : ступени";
 
             //заполняем таблицу полученными данными
             for (int i = 2; i < source1.Rows.Count + 2; i++)
@@ -136,7 +135,7 @@ namespace AnalysisOfKeywordsBehaviour
         }
 
         /// <summary>
-        /// Экспортируем ассоциативное поле в MS Excel.
+        /// Экспортирует ассоциативное поле в MS Excel.
         /// </summary>
         /// <param name="field">Ассоциативное поле.</param>
         public void ExportField(List<List<string>> field)
@@ -163,12 +162,12 @@ namespace AnalysisOfKeywordsBehaviour
         /// <param name="text">Текст для экспорта.</param>
         public void ExportText(string text)
         {
-            Microsoft.Office.Interop.Word.Application app = new Microsoft.Office.Interop.Word.Application(); //создаем объект word
+            Microsoft.Office.Interop.Word.Application wordApp = new Microsoft.Office.Interop.Word.Application(); //создаем объект word
 
-            app.Documents.Add();    //добавляем новый документ
-            app.ActiveDocument.Select();    //вставляем курсор в начало документа
-            app.Selection.FormattedText.Text = text;    //пишем текст, начиная с позиции курсора
-            app.Visible = true;     //делаем объект видимым
+            wordApp.Documents.Add();    //добавляем новый документ
+            wordApp.ActiveDocument.Select();    //вставляем курсор в начало документа
+            wordApp.Selection.FormattedText.Text = text;    //пишем текст, начиная с позиции курсора
+            wordApp.Visible = true;     //делаем объект видимым
         }
     }
 }
