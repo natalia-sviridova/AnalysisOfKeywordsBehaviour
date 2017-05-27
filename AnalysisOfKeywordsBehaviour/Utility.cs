@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace AnalysisOfKeywordsBehaviour
 {
+    /// <summary>
+    /// Предоставляет ряд вспомогательных методов для работы приложения.
+    /// </summary>
     static class Utility
     {
         /// <summary>
@@ -143,15 +146,25 @@ namespace AnalysisOfKeywordsBehaviour
             return Math.Round(Sum1 / Math.Sqrt(Sum2 * Sum3), 2);
         }
 
+        /// <summary>
+        /// Объединяет все элементы списка из строк в единую строку.
+        /// </summary>
+        /// <param name="list">Список, элементы которого необходимо объединить в строку.</param>
+        /// <returns>Возвращает строку из элементов списка, разделенных "-".</returns>
         public static string MakeString(List<string> list)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder output = new StringBuilder();
             for (int i = 0; i < list.Count - 1; i++)
-                sb.Append(list[i] + "-");
-            sb.Append(list[list.Count - 1]);
-            return sb.ToString();
+                output.Append(list[i] + "-");
+            output.Append(list[list.Count - 1]);
+            return output.ToString();
         }
 
+        /// <summary>
+        /// Выводит тройные/четверные встречаемости.
+        /// </summary>
+        /// <param name="multOccurrence">Словарь с тройными/четверными встречаемостями.</param>
+        /// <returns>Возвращает строку, состоящую из всех тройных/четверных встречаемостях.</returns>
         public static string PrintMultipleOccurrences(Dictionary<string, float> multOccurrence)
         {
             StringBuilder output = new StringBuilder();

@@ -7,10 +7,15 @@ using System.Threading.Tasks;
 namespace AnalysisOfKeywordsBehaviour
 {
     /// <summary>
-    /// Построение ассоциативного поля.
+    /// Предоставляет методы для построения ассоциативного поля.
     /// </summary>
     class FieldConstruction
     {
+        /// <summary>
+        /// Cлово из экспериментального списка, для которого строится ассоциативное поле.
+        /// </summary>
+        private string _word;
+
         /// <summary>
         /// Экспериментальные слова.
         /// </summary>
@@ -36,15 +41,6 @@ namespace AnalysisOfKeywordsBehaviour
         /// </summary>
         public List<string> Opposities;
         /// <summary>
-        /// Важные слова.
-        /// </summary>
-        public List<string> ImportantWords;
-
-        /// <summary>
-        /// Cлово из экспериментального списка, для которого строится ассоциативное поле.
-        /// </summary>
-        private string _word;
-        /// <summary>
         /// Количество шагов.
         /// </summary>
         public int Steps;
@@ -58,25 +54,21 @@ namespace AnalysisOfKeywordsBehaviour
         public int NumOfContactors;
 
         /// <summary>
-        /// Экспериментальные слова и число, показывающее, сколько раз данная лексема работала в качестве переключателя.
+        /// Экспериментальные слова и числа, показывающие, сколько раз данная лексема работала в качестве переключателя.
         /// </summary>
         public Dictionary<string, int> AllWordsAsSwitches;
         /// <summary>
-        /// Экспериментальные слова и число, показывающее, сколько раз данная лексема работала в качестве замыкателя.
+        /// Экспериментальные слова и числа, показывающие, сколько раз данная лексема работала в качестве замыкателя.
         /// </summary>
         public Dictionary<string, int> AllWordsAsContactors;
-        /// <summary>
-        /// Важные слова и число, показывающее, сколько раз данная лексема работала в качестве замыкателя.
-        /// </summary>
-        public Dictionary<string, int> ImpWordsAsContactors;
 
         /// <summary>
-        /// Все замыкатели поля.
+        /// Все замыкатели ассоциативного поля.
         /// </summary>
         public List<string> Contactors;
 
         /// <summary>
-        /// Все слов, использованные в ассоциативном поле.
+        /// Все слова, использованные в ассоциативном поле.
         /// </summary>
         List<string> AllUsedWords;
         /// <summary>
@@ -99,7 +91,7 @@ namespace AnalysisOfKeywordsBehaviour
         /// <param name="similarities">Список симиляров.</param>
         /// <param name="opposities">Список оппозитов.</param>
         /// <param name="importantWords">Список важных слов.</param>
-        public FieldConstruction(List<string> allWords, List<string> definitions, List<string> freeAssociations, List<string> directAssociations, List<string> similarities, List<string> opposities, List<string> importantWords)
+        public FieldConstruction(List<string> allWords, List<string> definitions, List<string> freeAssociations, List<string> directAssociations, List<string> similarities, List<string> opposities)
         {
             //инициализируем списки с экспериментальными данными
             AllWords = new List<string>(allWords);
@@ -108,7 +100,6 @@ namespace AnalysisOfKeywordsBehaviour
             DirectAssociations = new List<string>(directAssociations);
             Similarities = new List<string>(similarities);
             Opposities = new List<string>(opposities);
-            ImportantWords = new List<string>(importantWords);
         }
 
         /// <summary>
@@ -124,7 +115,6 @@ namespace AnalysisOfKeywordsBehaviour
             AllUsedWords = new List<string>();
             AllWordsAsSwitches = new Dictionary<string, int>();
             AllWordsAsContactors = new Dictionary<string, int>();
-            ImpWordsAsContactors = new Dictionary<string, int>();
             Contactors = new List<string>();
             NumOfContactors = 0;
             for (int i = 0; i < AllWords.Count; i++)
@@ -132,8 +122,6 @@ namespace AnalysisOfKeywordsBehaviour
                 AllWordsAsSwitches.Add(AllWords[i], 0);
                 AllWordsAsContactors.Add(AllWords[i], 0);
             }
-            for (int i = 0; i < ImportantWords.Count; i++)
-                ImpWordsAsContactors.Add(ImportantWords[i], 0);
 
             CurrentAllUsedWords = new List<string>();
             Field = new List<List<string>>();
@@ -324,8 +312,6 @@ namespace AnalysisOfKeywordsBehaviour
                                     AllWordsAsContactors.Add(word, 0);
                             }
                             AllWordsAsContactors[word]++;
-                            if (ImportantWords.IndexOf(word) != -1)
-                                ImpWordsAsContactors[word]++;
                             added = true;
                             down = true;
                         }
@@ -340,8 +326,6 @@ namespace AnalysisOfKeywordsBehaviour
                                     AllWordsAsContactors.Add(word, 0);
                             }
                             AllWordsAsContactors[word]++;
-                            if (ImportantWords.IndexOf(word) != -1)
-                                ImpWordsAsContactors[word]++;
                         }
                     }
                     else
@@ -419,8 +403,6 @@ namespace AnalysisOfKeywordsBehaviour
                                     AllWordsAsContactors.Add(word, 0);
                             }
                             AllWordsAsContactors[word]++;
-                            if (ImportantWords.IndexOf(word) != -1)
-                                ImpWordsAsContactors[word]++;
                             added = true;
                         }
                         else
@@ -434,8 +416,6 @@ namespace AnalysisOfKeywordsBehaviour
                                     AllWordsAsContactors.Add(word, 0);
                             }
                             AllWordsAsContactors[word]++;
-                            if (ImportantWords.IndexOf(word) != -1)
-                                ImpWordsAsContactors[word]++;
                         }
                     }
                     else
@@ -529,8 +509,6 @@ namespace AnalysisOfKeywordsBehaviour
                                     AllWordsAsContactors.Add(word, 0);
                             }
                             AllWordsAsContactors[word]++;
-                            if (ImportantWords.IndexOf(word) != -1)
-                                ImpWordsAsContactors[word]++;
                             added = true;
                         }
                         else
@@ -544,8 +522,6 @@ namespace AnalysisOfKeywordsBehaviour
                                     AllWordsAsContactors.Add(word, 0);
                             }
                             AllWordsAsContactors[word]++;
-                            if (ImportantWords.IndexOf(word) != -1)
-                                ImpWordsAsContactors[word]++;
                         }
                     }
                     else
@@ -616,8 +592,6 @@ namespace AnalysisOfKeywordsBehaviour
                             AllWordsAsContactors.Add(Similarities[index], 0);
                     }
                     AllWordsAsContactors[Similarities[index]]++;
-                    if (ImportantWords.IndexOf(Similarities[index]) != -1)
-                        ImpWordsAsContactors[Similarities[index]]++;
                 }
                 else
                 {
@@ -651,8 +625,6 @@ namespace AnalysisOfKeywordsBehaviour
                             AllWordsAsContactors.Add(Opposities[index], 0);
                     }
                     AllWordsAsContactors[Opposities[index]]++;
-                    if (ImportantWords.IndexOf(Opposities[index]) != -1)
-                        ImpWordsAsContactors[Opposities[index]]++;
                 }
                 else
                 {

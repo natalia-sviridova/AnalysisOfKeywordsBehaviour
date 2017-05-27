@@ -61,18 +61,14 @@ namespace AnalysisOfKeywordsBehaviour
         /// Оппозиты.
         /// </summary>
         public List<string> Opposities;
-        /// <summary>
-        /// "Важные слова".
-        /// </summary>
-        public List<string> ImportantWords;
 
         /// <summary>
         /// Проверяет, какие действия могут быть доступны пользователю во время простоя приложения.
         /// </summary>
         void Idle(object sender, EventArgs e)
         {
-            btnFieldForSelectedWord.Enabled = (comboBoxAllWords.SelectedItem != null) && (AllWords.Count != 0) && (Markems.Count != 0) && (Definitions.Count != 0) && (FreeAssociations.Count != 0) && (DirectAssociations.Count != 0) && (Similarities.Count != 0) && (Opposities.Count != 0);
-            btnFieldsForAllWords.Enabled = (AllWords.Count != 0) && (Markems.Count != 0) && (Definitions.Count != 0) && (FreeAssociations.Count != 0) && (DirectAssociations.Count != 0) && (Similarities.Count != 0) && (Opposities.Count != 0);
+            btnBuildFieldForSelectedWord.Enabled = (cmbAllWords.SelectedItem != null) && (AllWords.Count != 0) && (Markems.Count != 0) && (Definitions.Count != 0) && (FreeAssociations.Count != 0) && (DirectAssociations.Count != 0) && (Similarities.Count != 0) && (Opposities.Count != 0);
+            btnBuildFieldsForAllWords.Enabled = (AllWords.Count != 0) && (Markems.Count != 0) && (Definitions.Count != 0) && (FreeAssociations.Count != 0) && (DirectAssociations.Count != 0) && (Similarities.Count != 0) && (Opposities.Count != 0);
             btnCalculateCooccurrence.Enabled = (_text != null) && (_words != null);
         }
 
@@ -94,7 +90,6 @@ namespace AnalysisOfKeywordsBehaviour
             DirectAssociations = new List<string>();
             Similarities = new List<string>();
             Opposities = new List<string>();
-            ImportantWords = new List<string>();
         }
 
         /// <summary>
@@ -121,13 +116,13 @@ namespace AnalysisOfKeywordsBehaviour
                 _words = new WordsProcessing();
                 _words.ProcessWords(AllWords);
 
-                comboBoxAllWords.Items.Clear();
-                dataGridViewAllWords.Rows.Clear();
-                dataGridViewWords.Rows.Clear();
+                cmbAllWords.Items.Clear();
+                dgvAllWords.Rows.Clear();
+                dgvWords.Rows.Clear();
                 foreach (string word in AllWords)
                 {
-                    dataGridViewAllWords.Rows.Add(word);
-                    comboBoxAllWords.Items.Add(word);
+                    dgvAllWords.Rows.Add(word);
+                    cmbAllWords.Items.Add(word);
                 }
             }
         }
@@ -183,15 +178,6 @@ namespace AnalysisOfKeywordsBehaviour
             {
                 string fileName = openFD.FileName;
                 FillInList(fileName, Opposities);
-            }
-        }
-
-        private void важныеСловаToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (openFD.ShowDialog() == DialogResult.OK)
-            {
-                string fileName = openFD.FileName;
-                FillInList(fileName, ImportantWords);
             }
         }
 
@@ -258,13 +244,6 @@ namespace AnalysisOfKeywordsBehaviour
             form.Text = "Оппозиты";
             form.Show();
         }
-
-        private void важныхСловToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            HelpForm form = new HelpForm(this, 7);
-            form.Text = "Важные слова";
-            form.Show();
-        }
         //---------------------------------------------------------------------------------------------------//
 
         /// <summary>
@@ -304,11 +283,10 @@ namespace AnalysisOfKeywordsBehaviour
             //проверяем списки с экспериментальными данными на корректность длины
             if (CheckLists())
             {
-                dataGridViewWords.Rows.Clear();
-                dataGridViewImportantWords.Rows.Clear();
-                int index = AllWords.IndexOf(comboBoxAllWords.SelectedItem.ToString());
-                _myfield = new FieldConstruction(AllWords, Definitions, FreeAssociations, DirectAssociations, Similarities, Opposities, ImportantWords);
-                _myfield.InitField(comboBoxAllWords.SelectedItem.ToString());    //строим ассоциативное поле для выбранного слова
+                dgvWords.Rows.Clear();
+                int index = AllWords.IndexOf(cmbAllWords.SelectedItem.ToString());
+                _myfield = new FieldConstruction(AllWords, Definitions, FreeAssociations, DirectAssociations, Similarities, Opposities);
+                _myfield.InitField(cmbAllWords.SelectedItem.ToString());    //строим ассоциативное поле для выбранного слова
 
                 //инициализируем параметры ассоциативного поля
                 int NumOfSwitches = 0;
@@ -319,14 +297,12 @@ namespace AnalysisOfKeywordsBehaviour
                 double NumOfConAmongMarkems = 0;
                 double NumOfAllSwAmongMarkems = 0;
                 double NumOfAllConAmongMarkems = 0;
-                double NumOfConAmongImpWords = 0;
-                double NumOfAllConAmongImpWords = 0;
                 //вычисляем параметры
                 for (int i = 0; i < AllWords.Count; i++)
                 {
                     if (_myfield.AllWordsAsSwitches[AllWords[i]] != 0 || _myfield.AllWordsAsContactors[AllWords[i]] != 0)
                     {
-                        dataGridViewWords.Rows.Add(AllWords[i], _myfield.AllWordsAsSwitches[AllWords[i]], _myfield.AllWordsAsContactors[AllWords[i]], _myfield.AllWordsAsSwitches[AllWords[i]] + _myfield.AllWordsAsContactors[AllWords[i]]);
+                        dgvWords.Rows.Add(AllWords[i], _myfield.AllWordsAsSwitches[AllWords[i]], _myfield.AllWordsAsContactors[AllWords[i]], _myfield.AllWordsAsSwitches[AllWords[i]] + _myfield.AllWordsAsContactors[AllWords[i]]);
                         if (_myfield.AllWordsAsSwitches[AllWords[i]] != 0)
                         {
                             NumOfSwitches++;
@@ -344,29 +320,14 @@ namespace AnalysisOfKeywordsBehaviour
                         }
                     }
                 }
-                for (int i = 0; i < ImportantWords.Count; i++)
-                {
-                    dataGridViewImportantWords.Rows.Add(ImportantWords[i], _myfield.ImpWordsAsContactors[ImportantWords[i]]);
-                    if (_myfield.ImpWordsAsContactors[ImportantWords[i]] != 0)
-                    {
-                        NumOfConAmongImpWords++;
-                        NumOfAllConAmongImpWords += _myfield.ImpWordsAsContactors[ImportantWords[i]];
-                    }
-                }
 
                 double NumOfMarkemsInAll = NumOfSwAmongMarkems + NumOfConAmongMarkems;
                 double NumOfAllMarkemsInAll = NumOfAllSwAmongMarkems + NumOfAllConAmongMarkems;
 
-                double ShareOfMarkemsInSwitches;
-                double ShareOfMarkemsInContactors;
-                double ShareOfMarkemsInAllSwitches;
-                double ShareOfMarkemsInAllContactors;
+                double ShareOfMarkemsInSwitches, ShareOfMarkemsInContactors;
+                double ShareOfMarkemsInAllSwitches, ShareOfMarkemsInAllContactors;
 
-                double ShareOfMarkemsInAll;
-                double ShareOfAllMarkemsInAll;
-
-                double ShareOfImpWordsInContactors;
-                double ShareOfImpWordsInAllContactors;
+                double ShareOfMarkemsInAll, ShareOfAllMarkemsInAll;
 
                 if (NumOfSwitches == 0)
                 {
@@ -382,15 +343,11 @@ namespace AnalysisOfKeywordsBehaviour
                 {
                     ShareOfMarkemsInContactors = 0;
                     ShareOfMarkemsInAllContactors = 0;
-                    ShareOfImpWordsInContactors = 0;
-                    ShareOfImpWordsInAllContactors = 0;
                 }
                 else
                 {
                     ShareOfMarkemsInContactors = NumOfConAmongMarkems / NumOfContactors;
                     ShareOfMarkemsInAllContactors = NumOfAllConAmongMarkems / NumOfAllContactors;
-                    ShareOfImpWordsInContactors = NumOfConAmongImpWords / NumOfContactors;
-                    ShareOfImpWordsInAllContactors = NumOfAllConAmongImpWords / NumOfAllContactors;
                 }
                 if (NumOfSwitches == 0 && NumOfContactors == 0)
                 {
@@ -404,20 +361,19 @@ namespace AnalysisOfKeywordsBehaviour
                 }
 
                 //выводим полученные параметры в DataGridView
-                dataGridViewAllWords.Rows[index].Cells[1].Value = NumOfSwitches.ToString() + " (" + NumOfAllSwitches.ToString() + ")";
-                dataGridViewAllWords.Rows[index].Cells[2].Value = NumOfContactors.ToString() + " (" + NumOfAllContactors.ToString() + ")";
-                dataGridViewAllWords.Rows[index].Cells[3].Value = (NumOfSwitches + NumOfContactors).ToString() + " (" + (NumOfAllSwitches + NumOfAllContactors).ToString() + ")";
-                dataGridViewAllWords.Rows[index].Cells[4].Value = String.Format("{0:0.00}", ShareOfMarkemsInSwitches) + " (" + String.Format("{0:0.00}", ShareOfMarkemsInAllSwitches) + ")";
-                dataGridViewAllWords.Rows[index].Cells[5].Value = String.Format("{0:0.00}", ShareOfMarkemsInContactors) + " (" + String.Format("{0:0.00}", ShareOfMarkemsInAllContactors) + ")";
-                dataGridViewAllWords.Rows[index].Cells[6].Value = String.Format("{0:0.00}", ShareOfMarkemsInAll) + " (" + String.Format("{0:0.00}", ShareOfAllMarkemsInAll) + ")";
-                dataGridViewAllWords.Rows[index].Cells[7].Value = String.Format("{0:0.00}", ShareOfImpWordsInContactors) + " (" + String.Format("{0:0.00}", ShareOfImpWordsInAllContactors) + ")";
+                dgvAllWords.Rows[index].Cells[1].Value = NumOfSwitches.ToString() + " (" + NumOfAllSwitches.ToString() + ")";
+                dgvAllWords.Rows[index].Cells[2].Value = NumOfContactors.ToString() + " (" + NumOfAllContactors.ToString() + ")";
+                dgvAllWords.Rows[index].Cells[3].Value = (NumOfSwitches + NumOfContactors).ToString() + " (" + (NumOfAllSwitches + NumOfAllContactors).ToString() + ")";
+                dgvAllWords.Rows[index].Cells[4].Value = String.Format("{0:0.00}", ShareOfMarkemsInSwitches) + " (" + String.Format("{0:0.00}", ShareOfMarkemsInAllSwitches) + ")";
+                dgvAllWords.Rows[index].Cells[5].Value = String.Format("{0:0.00}", ShareOfMarkemsInContactors) + " (" + String.Format("{0:0.00}", ShareOfMarkemsInAllContactors) + ")";
+                dgvAllWords.Rows[index].Cells[6].Value = String.Format("{0:0.00}", ShareOfMarkemsInAll) + " (" + String.Format("{0:0.00}", ShareOfAllMarkemsInAll) + ")";
                 if (_myfield.Steps == 0)
-                    dataGridViewAllWords.Rows[index].Cells[8].Value = (_myfield.Steps) + " " + (_myfield.Levels);
+                    dgvAllWords.Rows[index].Cells[8].Value = (_myfield.Steps) + " " + (_myfield.Levels);
                 else
-                    dataGridViewAllWords.Rows[index].Cells[8].Value = (_myfield.Steps) + " " + (_myfield.Levels + 1);
+                    dgvAllWords.Rows[index].Cells[8].Value = (_myfield.Steps) + " " + (_myfield.Levels + 1);
                 btnExportToExcel.Enabled = true;
-                dataGridViewAllWords.Rows[index].Selected = true;
-                dataGridViewAllWords.FirstDisplayedScrollingRowIndex = index;
+                dgvAllWords.Rows[index].Selected = true;
+                dgvAllWords.FirstDisplayedScrollingRowIndex = index;
 
                 //делаем запрос на сохранение полученного ассоциативного поля в таблицу MS Excel
                 var confirmResult = MessageBox.Show("Хотите отобразить полученную таблицу в Microsoft Excel?",
@@ -438,16 +394,13 @@ namespace AnalysisOfKeywordsBehaviour
             if (CheckLists())
             {
                 //очищаем компоненты данных
-                dataGridViewWords.Rows.Clear();
-                dataGridViewImportantWords.Rows.Clear();
-                dataGridViewMarkems1.Rows.Clear();
-                dataGridViewMarkems2.Rows.Clear();
-                dataGridViewСorFactor1.Rows.Clear();
-                dataGridViewСorFactor2.Rows.Clear();
+                dgvWords.Rows.Clear();
+                dgvMarkems1.Rows.Clear();
+                dgvMarkems2.Rows.Clear();
+                dgvСorFactor1.Rows.Clear();
+                dgvСorFactor2.Rows.Clear();
                 foreach (string word in AllWords)
-                    dataGridViewWords.Rows.Add(word, 0, 0, 0);
-                foreach (string imp_word in ImportantWords)
-                    dataGridViewImportantWords.Rows.Add(imp_word, 0);
+                    dgvWords.Rows.Add(word, 0, 0, 0);
 
                 //инициализируем параметры
                 int[] Markems1 = new int[Markems.Count];
@@ -486,7 +439,7 @@ namespace AnalysisOfKeywordsBehaviour
                 double NumMarkemsAllNoMarkems = 0;
                 double NumAllMarkemsAllNoMarkems = 0;
 
-                _myfield = new FieldConstruction(AllWords, Definitions, DirectAssociations, FreeAssociations, Similarities, Opposities, ImportantWords);
+                _myfield = new FieldConstruction(AllWords, Definitions, DirectAssociations, FreeAssociations, Similarities, Opposities);
                 //строим ассоциативное поле для каждого слова из экспериментального списка
                 for (int k = 0; k < AllWords.Count; k++)
                 {
@@ -500,35 +453,15 @@ namespace AnalysisOfKeywordsBehaviour
                     double NumOfConAmongMarkems = 0;
                     double NumOfAllSwAmongMarkems = 0;
                     double NumOfAllConAmongMarkems = 0;
-                    double NumOfConAmongImpWords = 0;
-                    double NumOfAllConAmongImpWords = 0;
-
-                    /*StringBuilder switches = new StringBuilder();
-                    StringBuilder contactors = new StringBuilder();
-
-                    foreach (string cont in _myfield.Contactors)
-                        if (_myfield.AllWordsAsContactors[cont] == 1)
-                            if (Markems.IndexOf(cont) == -1)
-                                contactors.Append(cont).Append("\n");
-                            else
-                                contactors.Append(cont).Append("!\n");
-                        else
-                        {
-                            string num_of_cont = " (" + _myfield.AllWordsAsContactors[cont].ToString() + ")";
-                            if (Markems.IndexOf(cont) == -1)
-                                contactors.Append(cont).Append(num_of_cont).Append("\n");
-                            else
-                                contactors.Append(cont).Append(num_of_cont).Append("!\n");
-                        }*/
 
                     //вычисляем параметры
                     for (int i = 0; i < AllWords.Count; i++)
                     {
                         if (_myfield.AllWordsAsSwitches[AllWords[i]] != 0 || _myfield.AllWordsAsContactors[AllWords[i]] != 0)
                         {
-                            dataGridViewWords.Rows[i].Cells[1].Value = (int)dataGridViewWords.Rows[i].Cells[1].Value + _myfield.AllWordsAsSwitches[AllWords[i]];
-                            dataGridViewWords.Rows[i].Cells[2].Value = (int)dataGridViewWords.Rows[i].Cells[2].Value + _myfield.AllWordsAsContactors[AllWords[i]];
-                            dataGridViewWords.Rows[i].Cells[3].Value = (int)dataGridViewWords.Rows[i].Cells[3].Value + _myfield.AllWordsAsSwitches[AllWords[i]] + _myfield.AllWordsAsContactors[AllWords[i]];
+                            dgvWords.Rows[i].Cells[1].Value = (int)dgvWords.Rows[i].Cells[1].Value + _myfield.AllWordsAsSwitches[AllWords[i]];
+                            dgvWords.Rows[i].Cells[2].Value = (int)dgvWords.Rows[i].Cells[2].Value + _myfield.AllWordsAsContactors[AllWords[i]];
+                            dgvWords.Rows[i].Cells[3].Value = (int)dgvWords.Rows[i].Cells[3].Value + _myfield.AllWordsAsSwitches[AllWords[i]] + _myfield.AllWordsAsContactors[AllWords[i]];
 
                             int ind = Markems.IndexOf(AllWords[i]);
                             if (ind != -1)
@@ -537,21 +470,7 @@ namespace AnalysisOfKeywordsBehaviour
                                 Markems2[ind] += _myfield.AllWordsAsSwitches[AllWords[i]] + _myfield.AllWordsAsContactors[AllWords[i]];
                             }
                             if (_myfield.AllWordsAsSwitches[AllWords[i]] != 0)
-                                {
-                                /*if (_myfield.AllWordsAsSwitches[AllWords[i]] == 1)
-                                    if (Markems.IndexOf(AllWords[i]) == -1)            
-                                        switches.Append(AllWords[i]).Append("\n");
-                                    else                                              
-                                        switches.Append(AllWords[i]).Append("!\n");   
-                                else
-                                {
-                                    string num_of_swit = " (" + _myfield.AllWordsAsSwitches[AllWords[i]].ToString() + ")";
-                                    if (Markems.IndexOf(AllWords[i]) == -1)                            
-                                        switches.Append(AllWords[i]).Append(num_of_swit).Append("\n");
-                                    else                                                                
-                                        switches.Append(AllWords[i]).Append(num_of_swit).Append("!\n"); 
-                                }*/
-
+                            {
                                 NumOfSwitches++;
                                 NumOfAllSwitches += _myfield.AllWordsAsSwitches[AllWords[i]];
                                 if (ind != -1)
@@ -567,29 +486,14 @@ namespace AnalysisOfKeywordsBehaviour
                             }
                         }
                     }
-                    for (int i = 0; i < ImportantWords.Count; i++)
-                    {
-                        dataGridViewImportantWords.Rows[i].Cells[1].Value = (int)dataGridViewImportantWords.Rows[i].Cells[1].Value + _myfield.ImpWordsAsContactors[ImportantWords[i]];
-                        if (_myfield.ImpWordsAsContactors[ImportantWords[i]] != 0)
-                        {
-                            NumOfConAmongImpWords++;
-                            NumOfAllConAmongImpWords += _myfield.ImpWordsAsContactors[ImportantWords[i]];
-                        }
-                    }
 
                     double NumOfMarkemsInAll = NumOfSwAmongMarkems + NumOfConAmongMarkems;
                     double NumOfAllMarkemsInAll = NumOfAllSwAmongMarkems + NumOfAllConAmongMarkems;
 
-                    double ShareOfMarkemsInSwitches;
-                    double ShareOfMarkemsInContactors;
-                    double ShareOfMarkemsInAllSwitches;
-                    double ShareOfMarkemsInAllContactors;
+                    double ShareOfMarkemsInSwitches, ShareOfMarkemsInContactors;
+                    double ShareOfMarkemsInAllSwitches, ShareOfMarkemsInAllContactors;
 
-                    double ShareOfMarkemsInAll;
-                    double ShareOfAllMarkemsInAll;
-
-                    double ShareOfImpWordsInContactors;
-                    double ShareOfImpWordsInAllContactors;
+                    double ShareOfMarkemsInAll, ShareOfAllMarkemsInAll;
 
                     if (NumOfSwitches == 0)
                     {
@@ -605,15 +509,11 @@ namespace AnalysisOfKeywordsBehaviour
                     {
                         ShareOfMarkemsInContactors = 0;
                         ShareOfMarkemsInAllContactors = 0;
-                        ShareOfImpWordsInContactors = 0;
-                        ShareOfImpWordsInAllContactors = 0;
                     }
                     else
                     {
                         ShareOfMarkemsInContactors = NumOfConAmongMarkems / NumOfContactors;
                         ShareOfMarkemsInAllContactors = NumOfAllConAmongMarkems / NumOfAllContactors;
-                        ShareOfImpWordsInContactors = NumOfConAmongImpWords / NumOfContactors;
-                        ShareOfImpWordsInAllContactors = NumOfAllConAmongImpWords / NumOfAllContactors;
                     }
                     if (NumOfSwitches == 0 && NumOfContactors == 0)
                     {
@@ -660,17 +560,16 @@ namespace AnalysisOfKeywordsBehaviour
                     }
 
                     //выводим полученные параметры в DataGridView
-                    dataGridViewAllWords.Rows[k].Cells[1].Value = NumOfSwitches.ToString() + " (" + NumOfAllSwitches.ToString() + ")\n";
-                    dataGridViewAllWords.Rows[k].Cells[2].Value = NumOfContactors.ToString() + " (" + NumOfAllContactors.ToString() + ")\n";
-                    dataGridViewAllWords.Rows[k].Cells[3].Value = (NumOfSwitches + NumOfContactors).ToString() + " (" + (NumOfAllSwitches + NumOfAllContactors).ToString() + ")";
-                    dataGridViewAllWords.Rows[k].Cells[4].Value = String.Format("{0:0.00}", ShareOfMarkemsInSwitches) + " (" + String.Format("{0:0.00}", ShareOfMarkemsInAllSwitches) + ")";
-                    dataGridViewAllWords.Rows[k].Cells[5].Value = String.Format("{0:0.00}", ShareOfMarkemsInContactors) + " (" + String.Format("{0:0.00}", ShareOfMarkemsInAllContactors) + ")";
-                    dataGridViewAllWords.Rows[k].Cells[6].Value = String.Format("{0:0.00}", ShareOfMarkemsInAll) + " (" + String.Format("{0:0.00}", ShareOfAllMarkemsInAll) + ")";
-                    dataGridViewAllWords.Rows[k].Cells[7].Value = String.Format("{0:0.00}", ShareOfImpWordsInContactors) + " (" + String.Format("{0:0.00}", ShareOfImpWordsInAllContactors) + ")";
+                    dgvAllWords.Rows[k].Cells[1].Value = NumOfSwitches.ToString() + " (" + NumOfAllSwitches.ToString() + ")\n";
+                    dgvAllWords.Rows[k].Cells[2].Value = NumOfContactors.ToString() + " (" + NumOfAllContactors.ToString() + ")\n";
+                    dgvAllWords.Rows[k].Cells[3].Value = (NumOfSwitches + NumOfContactors).ToString() + " (" + (NumOfAllSwitches + NumOfAllContactors).ToString() + ")";
+                    dgvAllWords.Rows[k].Cells[4].Value = String.Format("{0:0.00}", ShareOfMarkemsInSwitches) + " (" + String.Format("{0:0.00}", ShareOfMarkemsInAllSwitches) + ")";
+                    dgvAllWords.Rows[k].Cells[5].Value = String.Format("{0:0.00}", ShareOfMarkemsInContactors) + " (" + String.Format("{0:0.00}", ShareOfMarkemsInAllContactors) + ")";
+                    dgvAllWords.Rows[k].Cells[6].Value = String.Format("{0:0.00}", ShareOfMarkemsInAll) + " (" + String.Format("{0:0.00}", ShareOfAllMarkemsInAll) + ")";
                     if (_myfield.Steps == 0)
-                        dataGridViewAllWords.Rows[k].Cells[8].Value = (_myfield.Steps) + " " + (_myfield.Levels);
+                        dgvAllWords.Rows[k].Cells[8].Value = (_myfield.Steps) + " " + (_myfield.Levels);
                     else
-                        dataGridViewAllWords.Rows[k].Cells[8].Value = (_myfield.Steps) + " " + (_myfield.Levels + 1);
+                        dgvAllWords.Rows[k].Cells[8].Value = (_myfield.Steps) + " " + (_myfield.Levels + 1);
                 }
 
                 int[] MarkemsRang = new int[Markems.Count];
@@ -679,37 +578,37 @@ namespace AnalysisOfKeywordsBehaviour
 
                 for (int i = 0; i < Markems.Count; i++)
                 {
-                    dataGridViewMarkems1.Rows.Add(Markems[i], MarkemsRang[i], Markems1[i], 0);
-                    dataGridViewMarkems2.Rows.Add(Markems[i], MarkemsRang[i], Markems2[i], 0);
+                    dgvMarkems1.Rows.Add(Markems[i], MarkemsRang[i], Markems1[i], 0);
+                    dgvMarkems2.Rows.Add(Markems[i], MarkemsRang[i], Markems2[i], 0);
                 }
 
                 /*вычисляем коэффициенты корреляции между рангами и частотами встречаемости маркем
                   и выводим полученные коэффициенты в DataGridView*/
                 for (int i = 0; i < 5; i++)
                 {
-                    dataGridViewСorFactor1.Rows.Add(i * 10 + 1 + " - " + (i + 1) * 10, Utility.CalcCorretationFactor(MarkemsRang, Markems1, i, true));
-                    dataGridViewСorFactor2.Rows.Add(i * 10 + 1 + " - " + (i + 1) * 10, Utility.CalcCorretationFactor(MarkemsRang, Markems2, i, true));
+                    dgvСorFactor1.Rows.Add(i * 10 + 1 + " - " + (i + 1) * 10, Utility.CalcCorretationFactor(MarkemsRang, Markems1, i, true));
+                    dgvСorFactor2.Rows.Add(i * 10 + 1 + " - " + (i + 1) * 10, Utility.CalcCorretationFactor(MarkemsRang, Markems2, i, true));
                 }
 
-                tBCorFactor1.Text = Utility.CalcCorretationFactor(MarkemsRang, Markems1, 0, false).ToString();
-                tBCorFactor2.Text = Utility.CalcCorretationFactor(MarkemsRang, Markems2, 0, false).ToString();
+                tbxCorFactor1.Text = Utility.CalcCorretationFactor(MarkemsRang, Markems1, 0, false).ToString();
+                tbxCorFactor2.Text = Utility.CalcCorretationFactor(MarkemsRang, Markems2, 0, false).ToString();
 
-                tBAvgNumSwitInMarkems.Text = (NumSwitInMarkems / 50).ToString() + " (" + (NumAllSwitInMarkems / 50).ToString() + ")";
-                tBAvgNumConcInMarkems.Text = (NumConcInMarkems / 50).ToString() + " (" + (NumAllConcInMarkems / 50).ToString() + ")";
-                tBAvgNumSwitInNoMarkems.Text = (NumSwitInNoMarkems / 50).ToString() + " (" + (NumAllSwitInNoMarkems / 50).ToString() + ")";
-                tBAvgNumConcInNoMarkems.Text = (NumConcInNoMarkems / 50).ToString() + " (" + (NumAllConcInNoMarkems / 50).ToString() + ")";
-                tBAvgNumAllInMarkems.Text = (NumInMarkems / 50).ToString() + " (" + (NumAllInMarkems / 50).ToString() + ")";
-                tBAvgNumAllInNoMarkems.Text = (NumInNoMarkems / 50).ToString() + " (" + (NumAllInNoMarkems / 50).ToString() + ")";
+                tbxAvgNumSwitInMarkems.Text = (NumSwitInMarkems / 50).ToString() + " (" + (NumAllSwitInMarkems / 50).ToString() + ")";
+                tbxAvgNumConcInMarkems.Text = (NumConcInMarkems / 50).ToString() + " (" + (NumAllConcInMarkems / 50).ToString() + ")";
+                tbxAvgNumSwitInNoMarkems.Text = (NumSwitInNoMarkems / 50).ToString() + " (" + (NumAllSwitInNoMarkems / 50).ToString() + ")";
+                tbxAvgNumConcInNoMarkems.Text = (NumConcInNoMarkems / 50).ToString() + " (" + (NumAllConcInNoMarkems / 50).ToString() + ")";
+                tbxAvgNumAllInMarkems.Text = (NumInMarkems / 50).ToString() + " (" + (NumAllInMarkems / 50).ToString() + ")";
+                tbxAvgNumAllInNoMarkems.Text = (NumInNoMarkems / 50).ToString() + " (" + (NumAllInNoMarkems / 50).ToString() + ")";
 
-                tBAvgNumMarkemsSwitMarkems.Text = (NumMarkemsSwitMarkems / 50).ToString() + " (" + (NumAllMarkemsSwitMarkems / 50).ToString() + ")";
-                tBAvgNumMarkemsConcMarkems.Text = (NumMarkemsConcMarkems / 50).ToString() + " (" + (NumAllMarkemsConcMarkems / 50).ToString() + ")";
-                tBAvgNumMarkemsAllMarkems.Text = (NumMarkemsAllMarkems / 50).ToString() + " (" + (NumAllMarkemsAllMarkems / 50).ToString() + ")";
-                tBAvgNumMarkemsSwitNoMarkems.Text = (NumMarkemsSwitNoMarkems / 50).ToString() + " (" + (NumAllMarkemsSwitNoMarkems / 50).ToString() + ")";
-                tBAvgNumMarkemsConcNoMarkems.Text = (NumMarkemsConcNoMarkems / 50).ToString() + " (" + (NumAllMarkemsConcNoMarkems / 50).ToString() + ")";
-                tBAvgNumMarkemsAllNoMarkems.Text = (NumMarkemsAllNoMarkems / 50).ToString() + " (" + (NumAllMarkemsAllNoMarkems / 50).ToString() + ")";
+                tbxAvgNumMarkemsSwitMarkems.Text = (NumMarkemsSwitMarkems / 50).ToString() + " (" + (NumAllMarkemsSwitMarkems / 50).ToString() + ")";
+                tbxAvgNumMarkemsConcMarkems.Text = (NumMarkemsConcMarkems / 50).ToString() + " (" + (NumAllMarkemsConcMarkems / 50).ToString() + ")";
+                tbxAvgNumMarkemsAllMarkems.Text = (NumMarkemsAllMarkems / 50).ToString() + " (" + (NumAllMarkemsAllMarkems / 50).ToString() + ")";
+                tbxAvgNumMarkemsSwitNoMarkems.Text = (NumMarkemsSwitNoMarkems / 50).ToString() + " (" + (NumAllMarkemsSwitNoMarkems / 50).ToString() + ")";
+                tbxAvgNumMarkemsConcNoMarkems.Text = (NumMarkemsConcNoMarkems / 50).ToString() + " (" + (NumAllMarkemsConcNoMarkems / 50).ToString() + ")";
+                tbxAvgNumMarkemsAllNoMarkems.Text = (NumMarkemsAllNoMarkems / 50).ToString() + " (" + (NumAllMarkemsAllNoMarkems / 50).ToString() + ")";
 
                 btnExportToExcel.Enabled = true;
-                dataGridViewAllWords.FirstDisplayedScrollingRowIndex = 0;
+                dgvAllWords.FirstDisplayedScrollingRowIndex = 0;
             }
         }
 
@@ -755,7 +654,7 @@ namespace AnalysisOfKeywordsBehaviour
         /// </summary>
         private void btnExportToExcel_Click(object sender, EventArgs e)
         {
-            _resultWriter.ExportTables(dataGridViewAllWords, dataGridViewWords, dataGridViewMarkems1, dataGridViewСorFactor1, tBCorFactor1.Text, dataGridViewMarkems2, dataGridViewСorFactor2, tBCorFactor2.Text, dataGridViewImportantWords, dgvCooccurrence, tBAvgNumSwitInMarkems.Text, tBAvgNumConcInMarkems.Text, tBAvgNumAllInMarkems.Text, tBAvgNumSwitInNoMarkems.Text, tBAvgNumConcInNoMarkems.Text, tBAvgNumAllInNoMarkems.Text, tBAvgNumMarkemsSwitMarkems.Text, tBAvgNumMarkemsConcMarkems.Text, tBAvgNumMarkemsAllMarkems.Text, tBAvgNumMarkemsSwitNoMarkems.Text, tBAvgNumMarkemsConcNoMarkems.Text, tBAvgNumMarkemsAllNoMarkems.Text);
+            _resultWriter.ExportTables(dgvAllWords, dgvWords, dgvMarkems1, dgvСorFactor1, tbxCorFactor1.Text, dgvMarkems2, dgvСorFactor2, tbxCorFactor2.Text, dgvCooccurrence, tbxAvgNumSwitInMarkems.Text, tbxAvgNumConcInMarkems.Text, tbxAvgNumAllInMarkems.Text, tbxAvgNumSwitInNoMarkems.Text, tbxAvgNumConcInNoMarkems.Text, tbxAvgNumAllInNoMarkems.Text, tbxAvgNumMarkemsSwitMarkems.Text, tbxAvgNumMarkemsConcMarkems.Text, tbxAvgNumMarkemsAllMarkems.Text, tbxAvgNumMarkemsSwitNoMarkems.Text, tbxAvgNumMarkemsConcNoMarkems.Text, tbxAvgNumMarkemsAllNoMarkems.Text);
         }
 
         /// <summary>
@@ -772,16 +671,28 @@ namespace AnalysisOfKeywordsBehaviour
         /// </summary>
         private void btnClear_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridViewAllWords.Rows.Count; i++)
-                for (int j = 1; j < dataGridViewAllWords.Columns.Count; j++)
-                    dataGridViewAllWords.Rows[i].Cells[j].Value = "";
-            dataGridViewWords.Rows.Clear();
-            dataGridViewMarkems1.Rows.Clear();
-            dataGridViewMarkems2.Rows.Clear();
-            dataGridViewСorFactor1.Rows.Clear();
-            dataGridViewСorFactor2.Rows.Clear();
-            tBCorFactor1.Clear();
-            tBCorFactor2.Clear();
+            for (int i = 0; i < dgvAllWords.Rows.Count; i++)
+                for (int j = 1; j < dgvAllWords.Columns.Count; j++)
+                    dgvAllWords.Rows[i].Cells[j].Value = "";
+            dgvWords.Rows.Clear();
+            dgvMarkems1.Rows.Clear();
+            dgvMarkems2.Rows.Clear();
+            dgvСorFactor1.Rows.Clear();
+            dgvСorFactor2.Rows.Clear();
+            tbxCorFactor1.Clear();
+            tbxCorFactor2.Clear();
+            tbxAvgNumAllInMarkems.Clear();
+            tbxAvgNumAllInNoMarkems.Clear();
+            tbxAvgNumConcInMarkems.Clear();
+            tbxAvgNumConcInNoMarkems.Clear();
+            tbxAvgNumMarkemsAllMarkems.Clear();
+            tbxAvgNumMarkemsAllNoMarkems.Clear();
+            tbxAvgNumMarkemsConcMarkems.Clear();
+            tbxAvgNumMarkemsConcNoMarkems.Clear();
+            tbxAvgNumMarkemsSwitMarkems.Clear();
+            tbxAvgNumMarkemsSwitNoMarkems.Clear();
+            tbxAvgNumSwitInMarkems.Clear();
+            tbxAvgNumSwitInNoMarkems.Clear();
             dgvCooccurrence.Rows.Clear();
             tbxTripleOccurrence.Clear();
             tbxQuadrupleOccurrence.Clear();

@@ -79,20 +79,20 @@ namespace AnalysisOfKeywordsBehaviour
             {
                 case 0:
                     _mainForm.AllWords.Clear();
-                    _mainForm.dataGridViewAllWords.Rows.Clear();
+                    _mainForm.dgvAllWords.Rows.Clear();
                     for (int i = 0; i < tbx.Lines.Length; i++)
                     {
                         _mainForm.AllWords.Add(tbx.Lines[i]);
-                        _mainForm.dataGridViewAllWords.Rows.Add(tbx.Lines[i]);
+                        _mainForm.dgvAllWords.Rows.Add(tbx.Lines[i]);
                     }
                     break;
                 case 1:
                     _mainForm.Markems.Clear();
-                    _mainForm.dataGridViewWords.Rows.Clear();
+                    _mainForm.dgvWords.Rows.Clear();
                     for (int i = 0; i < tbx.Lines.Length; i++)
                     {
                         _mainForm.Markems.Add(tbx.Lines[i]);
-                        _mainForm.dataGridViewWords.Rows.Add(tbx.Lines[i]);
+                        _mainForm.dgvWords.Rows.Add(tbx.Lines[i]);
                     }
                     break;
                 case 2:
