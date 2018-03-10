@@ -108,6 +108,14 @@
             this.текстДляАнализаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnStrip = new System.Windows.Forms.MenuStrip();
             this.dgvAllWords = new System.Windows.Forms.DataGridView();
+            this.Word = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumOfSwitches = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumOfContactors = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumOfSwAndCont = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShareOfMarkemsInSwitches = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShareOfMarkemsInContactors = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShareOfMarkemsInAll = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StepsLevels = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbPageAllWords = new System.Windows.Forms.TabPage();
             this.dgvWords = new System.Windows.Forms.DataGridView();
             this.Word2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -132,14 +140,15 @@
             this.btnCalculateCooccurrence = new System.Windows.Forms.Button();
             this.btnExportToWord = new System.Windows.Forms.Button();
             this.tlTip = new System.Windows.Forms.ToolTip(this.components);
-            this.Word = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumOfSwitches = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumOfContactors = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumOfSwAndCont = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShareOfMarkemsInSwitches = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShareOfMarkemsInContactors = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShareOfMarkemsInAll = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StepsLevels = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tbOccurrenceByCases = new System.Windows.Forms.TabPage();
+            this.dgvOccurrenceByCases = new System.Windows.Forms.DataGridView();
+            this.ExpWord = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nominative = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Genitive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dative = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Accusative = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Instrumental = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Locative = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbPageRes.SuspendLayout();
             this.tbPageMarkems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvСorFactor2)).BeginInit();
@@ -154,6 +163,8 @@
             this.tbPageDoubleOccurrence.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCooccurrence)).BeginInit();
             this.tbPageMultipleOccurrence.SuspendLayout();
+            this.tbOccurrenceByCases.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOccurrenceByCases)).BeginInit();
             this.SuspendLayout();
             // 
             // tbxCorFactor1
@@ -779,12 +790,13 @@
             // 
             // mnStrip
             // 
+            this.mnStrip.AllowMerge = false;
             this.mnStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.загрузитьСписокToolStripMenuItem,
             this.просмотретьСписокToolStripMenuItem});
             this.mnStrip.Location = new System.Drawing.Point(0, 0);
             this.mnStrip.Name = "mnStrip";
-            this.mnStrip.Size = new System.Drawing.Size(1135, 24);
+            this.mnStrip.Size = new System.Drawing.Size(1159, 24);
             this.mnStrip.TabIndex = 15;
             this.mnStrip.Text = "Меню";
             // 
@@ -807,6 +819,68 @@
             this.dgvAllWords.ReadOnly = true;
             this.dgvAllWords.Size = new System.Drawing.Size(589, 318);
             this.dgvAllWords.TabIndex = 1;
+            // 
+            // Word
+            // 
+            this.Word.FillWeight = 109.375F;
+            this.Word.HeaderText = "Слово";
+            this.Word.Name = "Word";
+            this.Word.ReadOnly = true;
+            this.Word.Width = 63;
+            // 
+            // NumOfSwitches
+            // 
+            this.NumOfSwitches.FillWeight = 105.6521F;
+            this.NumOfSwitches.HeaderText = "Кол-во переключателей";
+            this.NumOfSwitches.Name = "NumOfSwitches";
+            this.NumOfSwitches.ReadOnly = true;
+            this.NumOfSwitches.Width = 140;
+            // 
+            // NumOfContactors
+            // 
+            this.NumOfContactors.FillWeight = 95.98333F;
+            this.NumOfContactors.HeaderText = "Кол-во замыкателей";
+            this.NumOfContactors.Name = "NumOfContactors";
+            this.NumOfContactors.ReadOnly = true;
+            this.NumOfContactors.Width = 126;
+            // 
+            // NumOfSwAndCont
+            // 
+            this.NumOfSwAndCont.HeaderText = "Кол-во переключателей + замыкателей";
+            this.NumOfSwAndCont.Name = "NumOfSwAndCont";
+            this.NumOfSwAndCont.ReadOnly = true;
+            this.NumOfSwAndCont.Width = 117;
+            // 
+            // ShareOfMarkemsInSwitches
+            // 
+            this.ShareOfMarkemsInSwitches.FillWeight = 87.91594F;
+            this.ShareOfMarkemsInSwitches.HeaderText = "Доля маркем в переключателях";
+            this.ShareOfMarkemsInSwitches.Name = "ShareOfMarkemsInSwitches";
+            this.ShareOfMarkemsInSwitches.ReadOnly = true;
+            this.ShareOfMarkemsInSwitches.Width = 179;
+            // 
+            // ShareOfMarkemsInContactors
+            // 
+            this.ShareOfMarkemsInContactors.FillWeight = 91.9072F;
+            this.ShareOfMarkemsInContactors.HeaderText = "Доля маркем в замыкателях";
+            this.ShareOfMarkemsInContactors.Name = "ShareOfMarkemsInContactors";
+            this.ShareOfMarkemsInContactors.ReadOnly = true;
+            this.ShareOfMarkemsInContactors.Width = 105;
+            // 
+            // ShareOfMarkemsInAll
+            // 
+            this.ShareOfMarkemsInAll.HeaderText = "Доля маркем в переключателях+замыкателях";
+            this.ShareOfMarkemsInAll.Name = "ShareOfMarkemsInAll";
+            this.ShareOfMarkemsInAll.ReadOnly = true;
+            this.ShareOfMarkemsInAll.Width = 246;
+            // 
+            // StepsLevels
+            // 
+            this.StepsLevels.FillWeight = 103.028F;
+            this.StepsLevels.HeaderText = "Шаги:ступени";
+            this.StepsLevels.Name = "StepsLevels";
+            this.StepsLevels.ReadOnly = true;
+            this.StepsLevels.Width = 101;
             // 
             // tbPageAllWords
             // 
@@ -871,6 +945,8 @@
             this.tbControl.Controls.Add(this.tbPageRes);
             this.tbControl.Controls.Add(this.tbPageDoubleOccurrence);
             this.tbControl.Controls.Add(this.tbPageMultipleOccurrence);
+            this.tbControl.Controls.Add(this.tbOccurrenceByCases);
+            this.tbControl.HotTrack = true;
             this.tbControl.Location = new System.Drawing.Point(12, 27);
             this.tbControl.Name = "tbControl";
             this.tbControl.SelectedIndex = 0;
@@ -961,7 +1037,7 @@
             this.btnExportToExcel.Enabled = false;
             this.btnExportToExcel.Location = new System.Drawing.Point(977, 224);
             this.btnExportToExcel.Name = "btnExportToExcel";
-            this.btnExportToExcel.Size = new System.Drawing.Size(141, 37);
+            this.btnExportToExcel.Size = new System.Drawing.Size(166, 37);
             this.btnExportToExcel.TabIndex = 21;
             this.btnExportToExcel.Text = "Экспортировать результаты в Excel";
             this.btnExportToExcel.UseVisualStyleBackColor = true;
@@ -971,7 +1047,7 @@
             // 
             this.btnBuildFieldsForAllWords.Location = new System.Drawing.Point(977, 110);
             this.btnBuildFieldsForAllWords.Name = "btnBuildFieldsForAllWords";
-            this.btnBuildFieldsForAllWords.Size = new System.Drawing.Size(141, 37);
+            this.btnBuildFieldsForAllWords.Size = new System.Drawing.Size(166, 37);
             this.btnBuildFieldsForAllWords.TabIndex = 19;
             this.btnBuildFieldsForAllWords.Text = "Построить поля для экспериментального списка";
             this.btnBuildFieldsForAllWords.UseVisualStyleBackColor = true;
@@ -981,7 +1057,7 @@
             // 
             this.btnBuildFieldForSelectedWord.Location = new System.Drawing.Point(977, 49);
             this.btnBuildFieldForSelectedWord.Name = "btnBuildFieldForSelectedWord";
-            this.btnBuildFieldForSelectedWord.Size = new System.Drawing.Size(141, 37);
+            this.btnBuildFieldForSelectedWord.Size = new System.Drawing.Size(166, 37);
             this.btnBuildFieldForSelectedWord.TabIndex = 18;
             this.btnBuildFieldForSelectedWord.Text = "Построить поле для выбранного слова";
             this.btnBuildFieldForSelectedWord.UseMnemonic = false;
@@ -1009,7 +1085,7 @@
             // 
             this.btnClear.Location = new System.Drawing.Point(977, 342);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(141, 37);
+            this.btnClear.Size = new System.Drawing.Size(166, 37);
             this.btnClear.TabIndex = 20;
             this.btnClear.Text = "Очистить компоненты данных";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -1020,7 +1096,7 @@
             this.btnCalculateCooccurrence.Enabled = false;
             this.btnCalculateCooccurrence.Location = new System.Drawing.Point(977, 167);
             this.btnCalculateCooccurrence.Name = "btnCalculateCooccurrence";
-            this.btnCalculateCooccurrence.Size = new System.Drawing.Size(141, 37);
+            this.btnCalculateCooccurrence.Size = new System.Drawing.Size(166, 37);
             this.btnCalculateCooccurrence.TabIndex = 9;
             this.btnCalculateCooccurrence.Text = "Рассчитать совместную встречаемость";
             this.btnCalculateCooccurrence.UseVisualStyleBackColor = true;
@@ -1031,79 +1107,92 @@
             this.btnExportToWord.Enabled = false;
             this.btnExportToWord.Location = new System.Drawing.Point(977, 283);
             this.btnExportToWord.Name = "btnExportToWord";
-            this.btnExportToWord.Size = new System.Drawing.Size(141, 37);
+            this.btnExportToWord.Size = new System.Drawing.Size(166, 37);
             this.btnExportToWord.TabIndex = 24;
             this.btnExportToWord.Text = "Экспортировать результаты в Word";
             this.btnExportToWord.UseVisualStyleBackColor = true;
             this.btnExportToWord.Click += new System.EventHandler(this.btnExportToWord_Click);
             // 
-            // Word
+            // tbOccurrenceByCases
             // 
-            this.Word.FillWeight = 109.375F;
-            this.Word.HeaderText = "Слово";
-            this.Word.Name = "Word";
-            this.Word.ReadOnly = true;
-            this.Word.Width = 63;
+            this.tbOccurrenceByCases.Controls.Add(this.dgvOccurrenceByCases);
+            this.tbOccurrenceByCases.Location = new System.Drawing.Point(4, 22);
+            this.tbOccurrenceByCases.Name = "tbOccurrenceByCases";
+            this.tbOccurrenceByCases.Size = new System.Drawing.Size(941, 330);
+            this.tbOccurrenceByCases.TabIndex = 6;
+            this.tbOccurrenceByCases.Text = "Частота встечаемости по падежам";
+            this.tbOccurrenceByCases.UseVisualStyleBackColor = true;
             // 
-            // NumOfSwitches
+            // dgvOccurrenceByCases
             // 
-            this.NumOfSwitches.FillWeight = 105.6521F;
-            this.NumOfSwitches.HeaderText = "Кол-во переключателей";
-            this.NumOfSwitches.Name = "NumOfSwitches";
-            this.NumOfSwitches.ReadOnly = true;
-            this.NumOfSwitches.Width = 140;
+            this.dgvOccurrenceByCases.AllowUserToAddRows = false;
+            this.dgvOccurrenceByCases.AllowUserToDeleteRows = false;
+            this.dgvOccurrenceByCases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOccurrenceByCases.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ExpWord,
+            this.Nominative,
+            this.Genitive,
+            this.Dative,
+            this.Accusative,
+            this.Instrumental,
+            this.Locative});
+            this.dgvOccurrenceByCases.Location = new System.Drawing.Point(6, 6);
+            this.dgvOccurrenceByCases.Name = "dgvOccurrenceByCases";
+            this.dgvOccurrenceByCases.ReadOnly = true;
+            this.dgvOccurrenceByCases.RowHeadersWidth = 20;
+            this.dgvOccurrenceByCases.Size = new System.Drawing.Size(821, 321);
+            this.dgvOccurrenceByCases.TabIndex = 0;
             // 
-            // NumOfContactors
+            // ExpWord
             // 
-            this.NumOfContactors.FillWeight = 95.98333F;
-            this.NumOfContactors.HeaderText = "Кол-во замыкателей";
-            this.NumOfContactors.Name = "NumOfContactors";
-            this.NumOfContactors.ReadOnly = true;
-            this.NumOfContactors.Width = 126;
+            this.ExpWord.Frozen = true;
+            this.ExpWord.HeaderText = "Экспериментальное слово";
+            this.ExpWord.Name = "ExpWord";
+            this.ExpWord.ReadOnly = true;
+            this.ExpWord.Width = 170;
             // 
-            // NumOfSwAndCont
+            // Nominative
             // 
-            this.NumOfSwAndCont.HeaderText = "Кол-во переключателей + замыкателей";
-            this.NumOfSwAndCont.Name = "NumOfSwAndCont";
-            this.NumOfSwAndCont.ReadOnly = true;
-            this.NumOfSwAndCont.Width = 117;
+            this.Nominative.Frozen = true;
+            this.Nominative.HeaderText = "Именительный";
+            this.Nominative.Name = "Nominative";
+            this.Nominative.ReadOnly = true;
             // 
-            // ShareOfMarkemsInSwitches
+            // Genitive
             // 
-            this.ShareOfMarkemsInSwitches.FillWeight = 87.91594F;
-            this.ShareOfMarkemsInSwitches.HeaderText = "Доля маркем в переключателях";
-            this.ShareOfMarkemsInSwitches.Name = "ShareOfMarkemsInSwitches";
-            this.ShareOfMarkemsInSwitches.ReadOnly = true;
-            this.ShareOfMarkemsInSwitches.Width = 179;
+            this.Genitive.HeaderText = "Родительный";
+            this.Genitive.Name = "Genitive";
+            this.Genitive.ReadOnly = true;
             // 
-            // ShareOfMarkemsInContactors
+            // Dative
             // 
-            this.ShareOfMarkemsInContactors.FillWeight = 91.9072F;
-            this.ShareOfMarkemsInContactors.HeaderText = "Доля маркем в замыкателях";
-            this.ShareOfMarkemsInContactors.Name = "ShareOfMarkemsInContactors";
-            this.ShareOfMarkemsInContactors.ReadOnly = true;
-            this.ShareOfMarkemsInContactors.Width = 105;
+            this.Dative.HeaderText = "Дательный";
+            this.Dative.Name = "Dative";
+            this.Dative.ReadOnly = true;
             // 
-            // ShareOfMarkemsInAll
+            // Accusative
             // 
-            this.ShareOfMarkemsInAll.HeaderText = "Доля маркем в переключателях+замыкателях";
-            this.ShareOfMarkemsInAll.Name = "ShareOfMarkemsInAll";
-            this.ShareOfMarkemsInAll.ReadOnly = true;
-            this.ShareOfMarkemsInAll.Width = 246;
+            this.Accusative.HeaderText = "Винительный";
+            this.Accusative.Name = "Accusative";
+            this.Accusative.ReadOnly = true;
             // 
-            // StepsLevels
+            // Instrumental
             // 
-            this.StepsLevels.FillWeight = 103.028F;
-            this.StepsLevels.HeaderText = "Шаги:ступени";
-            this.StepsLevels.Name = "StepsLevels";
-            this.StepsLevels.ReadOnly = true;
-            this.StepsLevels.Width = 101;
+            this.Instrumental.HeaderText = "Творительный";
+            this.Instrumental.Name = "Instrumental";
+            this.Instrumental.ReadOnly = true;
+            // 
+            // Locative
+            // 
+            this.Locative.HeaderText = "Предложный";
+            this.Locative.Name = "Locative";
+            this.Locative.ReadOnly = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1135, 425);
+            this.ClientSize = new System.Drawing.Size(1159, 425);
             this.Controls.Add(this.btnExportToWord);
             this.Controls.Add(this.btnCalculateCooccurrence);
             this.Controls.Add(this.btnClear);
@@ -1116,6 +1205,8 @@
             this.Controls.Add(this.lblWordForBuilding);
             this.Controls.Add(this.cmbAllWords);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1175, 464);
+            this.MinimumSize = new System.Drawing.Size(1175, 464);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Анализ поведения ключевых слов автора";
@@ -1137,6 +1228,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCooccurrence)).EndInit();
             this.tbPageMultipleOccurrence.ResumeLayout(false);
             this.tbPageMultipleOccurrence.PerformLayout();
+            this.tbOccurrenceByCases.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOccurrenceByCases)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1255,6 +1348,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ShareOfMarkemsInContactors;
         private System.Windows.Forms.DataGridViewTextBoxColumn ShareOfMarkemsInAll;
         private System.Windows.Forms.DataGridViewTextBoxColumn StepsLevels;
+        private System.Windows.Forms.TabPage tbOccurrenceByCases;
+        private System.Windows.Forms.DataGridView dgvOccurrenceByCases;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ExpWord;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nominative;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Genitive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Dative;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Accusative;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Instrumental;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Locative;
     }
 }
 

@@ -21,6 +21,11 @@ namespace AnalysisOfKeywordsBehaviour
         /// </summary>
         public float SizeCoeff;
 
+        /// <summary>
+        /// Конструктор структуры.
+        /// </summary>
+        /// <param name="words">Слова контекста.</param>
+        /// <param name="sizeCoeff">Коэффициент размера контекста.</param>
         public Context(List<string> words, float sizeCoeff)
         {
             Words = new List<string>(words);

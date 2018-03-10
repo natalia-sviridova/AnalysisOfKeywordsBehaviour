@@ -16,7 +16,7 @@ namespace AnalysisOfKeywordsBehaviour
         /// <summary>
         /// Экспортирует итоговые параметры полученных ассоциативных полей в MS Excel.
         /// </summary>
-        public void ExportTables(DataGridView source1, DataGridView source2, DataGridView source3, DataGridView source4, string CorFactor1, DataGridView source5, DataGridView source6, string CorFactor2, DataGridView source7, string str1, string str2, string str3, string str4, string str5, string str6, string str7, string str8, string str9, string str10, string str11, string str12)
+        public void ExportTables(DataGridView source1, DataGridView source2, DataGridView source3, DataGridView source4, string CorFactor1, DataGridView source5, DataGridView source6, string CorFactor2, DataGridView source7, DataGridView source8, string str1, string str2, string str3, string str4, string str5, string str6, string str7, string str8, string str9, string str10, string str11, string str12)
         {
             Microsoft.Office.Interop.Excel.Application exApp = new Microsoft.Office.Interop.Excel.Application();
             Workbook wb = exApp.Workbooks.Add(XlSheetType.xlWorksheet);
@@ -130,6 +130,14 @@ namespace AnalysisOfKeywordsBehaviour
             for (int i = 1; i < source7.Rows.Count + 1; i++)
                 for (int j = 1; j < source7.Columns.Count + 1; j++)
                     workSheet6.Cells[i, j] = source7.Rows[i - 1].Cells[j - 1].Value;
+
+            Worksheet workSheet7 = (Worksheet)exApp.Worksheets.Add();    //создаем шестую таблицу с совместной встречаемостью
+            exApp.Columns.ColumnWidth = 20;
+
+            //заполняем таблицу полученными данными
+            for (int i = 1; i < source8.Rows.Count + 1; i++)
+                for (int j = 1; j < source8.Columns.Count + 1; j++)
+                    workSheet7.Cells[i, j] = source8.Rows[i - 1].Cells[j - 1].Value;
 
             exApp.Visible = true;   //делаем объект видимым
         }

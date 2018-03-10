@@ -367,9 +367,9 @@ namespace AnalysisOfKeywordsBehaviour
                 dgvAllWords.Rows[index].Cells[5].Value = String.Format("{0:0.00}", ShareOfMarkemsInContactors) + " (" + String.Format("{0:0.00}", ShareOfMarkemsInAllContactors) + ")";
                 dgvAllWords.Rows[index].Cells[6].Value = String.Format("{0:0.00}", ShareOfMarkemsInAll) + " (" + String.Format("{0:0.00}", ShareOfAllMarkemsInAll) + ")";
                 if (_field.Steps == 0)
-                    dgvAllWords.Rows[index].Cells[8].Value = (_field.Steps) + " " + (_field.Levels);
+                    dgvAllWords.Rows[index].Cells[7].Value = (_field.Steps) + " " + (_field.Levels);
                 else
-                    dgvAllWords.Rows[index].Cells[8].Value = (_field.Steps) + " " + (_field.Levels + 1);
+                    dgvAllWords.Rows[index].Cells[7].Value = (_field.Steps) + " " + (_field.Levels + 1);
                 btnExportToExcel.Enabled = true;
                 dgvAllWords.Rows[index].Selected = true;
                 dgvAllWords.FirstDisplayedScrollingRowIndex = index;
@@ -568,9 +568,9 @@ namespace AnalysisOfKeywordsBehaviour
                     dgvAllWords.Rows[k].Cells[5].Value = String.Format("{0:0.00}", ShareOfMarkemsInContactors) + " (" + String.Format("{0:0.00}", ShareOfMarkemsInAllContactors) + ")";
                     dgvAllWords.Rows[k].Cells[6].Value = String.Format("{0:0.00}", ShareOfMarkemsInAll) + " (" + String.Format("{0:0.00}", ShareOfAllMarkemsInAll) + ")";
                     if (_field.Steps == 0)
-                        dgvAllWords.Rows[k].Cells[8].Value = (_field.Steps) + " " + (_field.Levels);
+                        dgvAllWords.Rows[k].Cells[7].Value = (_field.Steps) + " " + (_field.Levels);
                     else
-                        dgvAllWords.Rows[k].Cells[8].Value = (_field.Steps) + " " + (_field.Levels + 1);
+                        dgvAllWords.Rows[k].Cells[7].Value = (_field.Steps) + " " + (_field.Levels + 1);
                 }
 
                 int[] MarkemsRang = new int[Markems.Count];
@@ -625,11 +625,14 @@ namespace AnalysisOfKeywordsBehaviour
 
             dgvCooccurrence.ColumnCount = _wordsProc.KeyWords.Count + 1;
             dgvCooccurrence.RowCount = _wordsProc.KeyWords.Count + 2;
+            dgvOccurrenceByCases.ColumnCount = 7;
+            dgvOccurrenceByCases.RowCount = _wordsProc.KeyWords.Count;
 
             for (int i = 0; i < _wordsProc.KeyWords.Count; i++)
             {
                 dgvCooccurrence.Rows[0].Cells[i + 1].Value = _wordsProc.KeyWords[i];
                 dgvCooccurrence.Rows[i + 1].Cells[0].Value = _wordsProc.KeyWords[i] + " " + _wordsProc.PrintRepetitions(i);
+                dgvOccurrenceByCases.Rows[i].Cells[0].Value = _wordsProc.KeyWords[i];
             }
 
             for (int i = 0; i < _wordsProc.KeyWords.Count; i++)
@@ -650,7 +653,11 @@ namespace AnalysisOfKeywordsBehaviour
             }
 
             tbxTripleOccurrence.Text = Utility.PrintMultipleOccurrences(_wordsProc.TripleOccurrences);
-            tbxQuadrupleOccurrence.Text += Utility.PrintMultipleOccurrences(_wordsProc.QuadrupleOccurrences);
+            tbxQuadrupleOccurrence.Text = Utility.PrintMultipleOccurrences(_wordsProc.QuadrupleOccurrences);
+
+            for (int i = 0; i < _wordsProc.KeyWords.Count; i++)
+                for (int j = 0; j < 6; j++)
+                dgvOccurrenceByCases.Rows[i].Cells[j + 1].Value = _wordsProc.OccurrenceByCases[i, j];
 
             btnExportToWord.Enabled = true;
             Cursor = Cursors.Default;
@@ -662,7 +669,7 @@ namespace AnalysisOfKeywordsBehaviour
         private void btnExportToExcel_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            _resultWriter.ExportTables(dgvAllWords, dgvWords, dgvMarkems1, dgvСorFactor1, tbxCorFactor1.Text, dgvMarkems2, dgvСorFactor2, tbxCorFactor2.Text, dgvCooccurrence, tbxAvgNumSwitInMarkems.Text, tbxAvgNumConcInMarkems.Text, tbxAvgNumAllInMarkems.Text, tbxAvgNumSwitInNoMarkems.Text, tbxAvgNumConcInNoMarkems.Text, tbxAvgNumAllInNoMarkems.Text, tbxAvgNumMarkemsSwitMarkems.Text, tbxAvgNumMarkemsConcMarkems.Text, tbxAvgNumMarkemsAllMarkems.Text, tbxAvgNumMarkemsSwitNoMarkems.Text, tbxAvgNumMarkemsConcNoMarkems.Text, tbxAvgNumMarkemsAllNoMarkems.Text);
+            _resultWriter.ExportTables(dgvAllWords, dgvWords, dgvMarkems1, dgvСorFactor1, tbxCorFactor1.Text, dgvMarkems2, dgvСorFactor2, tbxCorFactor2.Text, dgvCooccurrence, dgvOccurrenceByCases, tbxAvgNumSwitInMarkems.Text, tbxAvgNumConcInMarkems.Text, tbxAvgNumAllInMarkems.Text, tbxAvgNumSwitInNoMarkems.Text, tbxAvgNumConcInNoMarkems.Text, tbxAvgNumAllInNoMarkems.Text, tbxAvgNumMarkemsSwitMarkems.Text, tbxAvgNumMarkemsConcMarkems.Text, tbxAvgNumMarkemsAllMarkems.Text, tbxAvgNumMarkemsSwitNoMarkems.Text, tbxAvgNumMarkemsConcNoMarkems.Text, tbxAvgNumMarkemsAllNoMarkems.Text);
             Cursor = Cursors.Default;
         }
 

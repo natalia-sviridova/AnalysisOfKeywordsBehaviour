@@ -103,6 +103,11 @@ namespace AnalysisOfKeywordsBehaviour
         public Dictionary<string, float> QuadrupleOccurrences { get; private set; }
 
         /// <summary>
+        /// Таблица частоты встречаемости экспериментальных слов по падежам.
+        /// </summary>
+        public int[,] OccurrenceByCases { get; private set; }
+
+        /// <summary>
         /// Преобразует все формы имени существительного к одной строке.
         /// </summary>
         /// <param name="noun">Имя существительное.</param>
@@ -138,6 +143,10 @@ namespace AnalysisOfKeywordsBehaviour
             TableOfCooccurrence = new Cooccurrence[KeyWords.Count, KeyWords.Count];
             TripleOccurrences = new Dictionary<string, float>();
             QuadrupleOccurrences = new Dictionary<string, float>();
+            OccurrenceByCases = new int[KeyWords.Count, 6];
+            for (int i = 0; i < KeyWords.Count; i++)
+                for (int j = 0; j < 6; j++)
+                    OccurrenceByCases[i, j] = 0;
         }
 
         /// <summary>
@@ -198,7 +207,36 @@ namespace AnalysisOfKeywordsBehaviour
                         n = 0;
                         while (!found && n < _words[m].Count)
                             if (curWord == _words[m][n])
+                            {
                                 found = true;
+                                switch (n)
+                                {
+                                    case 0:
+                                    case 1:
+                                        OccurrenceByCases[m,0]++;
+                                        break;
+                                    case 2:
+                                    case 3:
+                                        OccurrenceByCases[m, 1]++;
+                                        break;
+                                    case 4:
+                                    case 5:
+                                        OccurrenceByCases[m, 2]++;
+                                        break;
+                                    case 6:
+                                    case 7:
+                                        OccurrenceByCases[m, 3]++;
+                                        break;
+                                    case 8:
+                                    case 9:
+                                        OccurrenceByCases[m, 4]++;
+                                        break;
+                                    case 10:
+                                    case 11:
+                                        OccurrenceByCases[m, 5]++;
+                                        break;
+                                }
+                            }
                             else
                                 n++;
                         m++;
